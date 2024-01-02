@@ -1,0 +1,26 @@
+.cont-pop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.element-pop {
+  margin: 20px;
+}
+
+.confirm-delete {
+  border: solid;
+  border-radius: 5px;
+  background-color: rgb(224, 54, 54);
+  cursor: pointer;
+  padding: 10px;
+}
+
+.cancel {
+  border: solid;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px;
+}

@@ -1,0 +1,48 @@
+.tools {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-category {
+  margin: 10px 10px 10px 10px;
+}
+
+.shop-mode {
+  cursor: pointer;
+
+  font-family: Poppins, sans-serif;
+  padding: 10px;
+  margin: 10px 10px 10px 10px;
+
+  border-radius: 100px;
+  box-shadow: 5px 5px 20px black;
+}
+
+.dark-mode {
+  display: flex;
+  margin: 10px;
+  width: 70px;
+
+  border-radius: 100px;
+  box-shadow: 5px 5px 20px black;
+}
+
+.dark-mode.active i {
+  transform: translateX(35px);
+}
+
+.dark-mode .bx {
+  transition: 0.3s;
+}
+
+.config {
+  margin: 10px;
+}
+
+.tools i {
+  cursor: pointer;
+  border-radius: 100px;
+  box-shadow: 5px 5px 20px black;
+}

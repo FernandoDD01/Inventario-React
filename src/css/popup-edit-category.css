@@ -1,0 +1,52 @@
+.cont-pop-edit-category form {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cont-pop-edit-category h2 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.input-new-edit-category {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  border: 2px solid #333;
+  border-radius: 40px;
+  font-size: 16px;
+  color: #333;
+  padding: 10px 20px 10px 10px;
+  margin-bottom: 20px;
+}
+
+.btn-edit-category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 35px;
+  background: #837272;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+  margin: 20px 15px;
+}
+
+.close-window-edit-category {
+  padding-right: 20px;
+  font-size: 40px;
+  text-align: end;
+  cursor: pointer;
+}

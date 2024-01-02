@@ -1,0 +1,165 @@
+.product-list-content {
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  align-items: center;
+}
+
+.product-reg-content {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: grid;
+
+  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: transparent;
+  text-align: center;
+}
+
+.enlace-product {
+  overflow: hidden;
+}
+
+.product-list-content .product-reg-content:last-child {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.header-table {
+  order: -2;
+  margin-top: 5px;
+  width: 100%;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas: ". head-prod head-cant head-prec enlace nota ";
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+.nom-reg {
+  grid-area: head-prod;
+}
+
+.cuantificador-content {
+  display: flex;
+  justify-content: center;
+}
+
+.cant-product {
+  margin-right: 5px;
+}
+.cant-reg {
+  grid-area: head-cant;
+}
+
+.precio-reg {
+  grid-area: head-prec;
+}
+.insertPeso {
+  display: flex;
+  justify-content: center;
+}
+.enlace {
+  grid-area: enlace;
+}
+
+.enlace-product {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.nota {
+  grid-area: nota;
+}
+.separador-header {
+  order: -1;
+  width: 90%;
+  background-color: black;
+  height: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.separador-footer {
+  order: 9999999;
+  width: 90%;
+  background-color: black;
+  height: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.footer-table {
+  margin-bottom: 10px;
+  order: 10000000;
+  width: 100%;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas: ". footer-prod footer-cant footer-prec . .";
+
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+
+.nom-reg-foot {
+  grid-area: footer-prod;
+}
+
+.cant-reg-foot {
+  grid-area: footer-cant;
+}
+
+.precio-reg-foot {
+  grid-area: footer-prec;
+}
+
+.tool-product {
+  display: flex;
+  justify-content: space-evenly;
+}
+/*visibilidad de la tabla*/
+
+/*
+.contenedor-tabla {
+  max-height: 0px;
+  visibility: hidden;
+}
+
+.contenedor-tabla.active {
+  visibility: visible;
+  max-height: 100%;
+}
+*/
+
+/*.contenedor-tabla {
+  height: 0px;
+  width: 100%;
+  overflow: hidden;
+
+  visibility: hidden;
+}*/
+
+.contenedor-tabla.active {
+  height: auto;
+
+  transition: all 0.2s;
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.contenedor-tabla.close {
+  height: 0px;
+
+  transition: all 0.2s;
+  transform: scaleY(0);
+  transform-origin: top;
+}

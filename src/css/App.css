@@ -1,0 +1,173 @@
+:root {
+  --color-header: gray;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+#root,
+body {
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #e2e2e2;
+  display: flex;
+  flex-flow: column;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  flex-grow: 1;
+}
+
+footer {
+  font-size: 14px;
+  background-color: antiquewhite;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+footer div {
+  margin: 10px;
+}
+
+.content-title {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--color-header);
+  font-family: Poppins, sans-serif;
+  font-style: italic;
+
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  box-shadow: 5px 5px 20px black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-title img {
+  width: 60px;
+  height: 60px;
+}
+
+.image {
+  height: 100%;
+  width: 10px;
+  flex-grow: 1;
+
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.title {
+  margin-left: 10px;
+  height: 100%;
+
+  flex-grow: 1;
+  align-self: start;
+}
+
+/* Diseño de categorias*/
+
+.category-content {
+  width: 100%;
+  margin-bottom: 10px;
+  box-shadow: 5px 5px 20px black;
+  border-radius: 20px;
+}
+
+.etiqueta-category {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: orangered;
+  border-radius: 20px;
+}
+
+.toolbar-right {
+  margin: 10px 20px 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nombre-categoria {
+  display: flex;
+  justify-content: center;
+
+  overflow: auto;
+}
+
+.nombre-categoria label {
+  margin-right: 10px;
+}
+
+.toolbar-left {
+  margin: 10px 10px 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete {
+  margin-right: 10px;
+  margin-left: 20px;
+}
+
+.empty-category {
+  align-self: center;
+}
+
+.total-content {
+  position: sticky;
+  bottom: 0px;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  font-family: Poppins, sans-serif;
+  font-size: 20px;
+}
+
+.total-sub-content {
+  padding: 10px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Poppins, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+
+  background-color: white;
+
+  box-shadow: 5px 5px 20px black;
+  border-radius: 50px;
+}

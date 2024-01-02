@@ -1,0 +1,65 @@
+.overlay-lista {
+  z-index: 3;
+}
+
+.cont-pop-lista h2 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.lista-content-lista {
+  overflow-x: auto;
+  padding: 10px;
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.close-window-lista {
+  padding-right: 20px;
+  font-size: 40px;
+  text-align: end;
+  cursor: pointer;
+}
+
+.categoria-list {
+  font-family: Poppins, sans-serif;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.producto-list {
+  font-family: Poppins, sans-serif;
+  display: grid;
+  grid-template-columns: 30px 1fr repeat(2, 60px);
+  word-wrap: break-word;
+  row-gap: 10px;
+  border-bottom: solid black;
+  border-width: 1px;
+}
+
+.nombre-producto-lista,
+.cantidad-producto-lista,
+.precio-producto-lista {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nombre-producto-lista {
+  width: 120px;
+}
+
+.btn-tachar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.total-list-content {
+  display: flex;
+  justify-content: flex-end;
+}

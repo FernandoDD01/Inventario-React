@@ -1,0 +1,28 @@
+.cont-pop-product form {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cont-pop-product h2 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.nota-content {
+  height: auto;
+  background-color: white;
+  font-family: "Quicksand", sans-serif;
+  font-style: italic;
+  margin: 40px;
+  font-size: 20px;
+}
+
+.close-window-nota {
+  padding-right: 20px;
+  font-size: 40px;
+  text-align: end;
+  cursor: pointer;
+}
