@@ -26,6 +26,7 @@
 }
 
 .add-folder {
+  cursor: pointer;
   margin-left: 5px;
   transform: translateY(6px);
   order: 2;

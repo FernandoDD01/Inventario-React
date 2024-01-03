@@ -28,3 +28,13 @@ export const app = initializeApp(firebaseConfig);
 
 //Initialize Firestore
 export const db = getFirestore(app);
+
+//Primero: obtener los folders que ya estan en la base de datos
+
+export let Folders = [];
+const q = query(collection(db, "Folders"));
+
+const querySnapshot = await getDocs(q);
+querySnapshot.forEach((doc) => {
+  Folders.push(doc.id);
+});

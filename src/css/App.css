@@ -89,6 +89,11 @@ footer div {
   align-self: start;
 }
 
+.sub-content {
+  display: flex;
+  justify-content: center;
+}
+
 /* Diseño de categorias*/
 
 .category-content {
@@ -141,7 +146,10 @@ footer div {
 }
 
 .empty-category {
-  align-self: center;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .total-content {
