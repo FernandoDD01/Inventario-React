@@ -104,7 +104,7 @@ export default function Dashboard() {
     const getObjeto = () => {
       if (
         view === "Bienvenida" ||
-        Categories.find((objeto) => objeto.Nombre === view) === undefined
+        Categories.find((objeto) => objeto.Categorias === view) === undefined
       ) {
         setThereCategories(false);
       } else {
@@ -146,26 +146,29 @@ export default function Dashboard() {
 
       <div className="content">
         <div className="sub-content">
-          {Categories.find((objeto) => objeto.Nombre === view) !== undefined ? (
-            Object.values(
-              Categories.find((objeto) => objeto.Nombre === view).Categorias
-            ).map((categoria, index) => {
-              return (
-                <Category
-                  key={index}
-                  nombreCategory={
-                    Object.keys(
-                      Categories.find((objeto) => objeto.Nombre === view)
-                        .Categorias
-                    )[index]
-                  }
-                  data={categoria}
-                ></Category>
-              );
-            })
-          ) : (
-            <WhithoutRegister />
-          )}
+          {view == "Bienvenida" && <h3>Bienvenid@</h3>}
+          {view !== "Bienvenida" &&
+          Categories.find((objeto) => objeto.Nombre === view) !== undefined &&
+          Object.keys(
+            Categories.find((objeto) => objeto.Nombre === view).Categorias
+          ).length !== 0
+            ? Object.values(
+                Categories.find((objeto) => objeto.Nombre === view).Categorias
+              ).map((categoria, index) => {
+                return (
+                  <Category
+                    key={index}
+                    nombreCategory={
+                      Object.keys(
+                        Categories.find((objeto) => objeto.Nombre === view)
+                          .Categorias
+                      )[index]
+                    }
+                    data={categoria}
+                  ></Category>
+                );
+              })
+            : view != "Bienvenida" && <WhithoutRegister />}
         </div>
       </div>
 
