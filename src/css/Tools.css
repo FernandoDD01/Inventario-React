@@ -46,3 +46,9 @@
   border-radius: 100px;
   box-shadow: 5px 5px 20px black;
 }
+
+.add-category i {
+  cursor: pointer;
+  border-radius: 100px;
+  box-shadow: 5px 5px 20px black;
+}

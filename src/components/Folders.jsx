@@ -1,4 +1,6 @@
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
+
+import ViewContext from "../context/viewContext";
 
 import { folderInitialState, folderReducer } from "../Reducers/folderReducer";
 
@@ -9,8 +11,13 @@ import { ModalAddFolder, ModalDeleteFolder } from "./ModalsFolders";
 
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
+import CategoryContext from "../context/categoryContext";
 
 export default function Folders() {
+  const { view, handleView } = useContext(ViewContext);
+
+  const { auxCategory, handleAuxCategory } = useContext(CategoryContext);
+
   const [nombreFolder, setNombreFolder] = useState("");
   const [delFolder, setDelFolder] = useState("");
 
@@ -59,6 +66,7 @@ export default function Folders() {
 
     closeModalAddFolder();
     setNombreFolder("");
+    handleView(nombreFolder);
     Toastify({
       text: `El folder ${nombreFolder} fue creado`,
       duration: 3000,
@@ -80,6 +88,7 @@ export default function Folders() {
   };
 
   const deleteFolder = (nombreFolder) => {
+    handleView("Bienvenida");
     closeModalDeleteFolder();
     setDelFolder("");
     dispatch({ type: TYPES.DELETE_FOLDER, payload: nombreFolder });
@@ -103,9 +112,17 @@ export default function Folders() {
     setNombreFolder(e.target.value);
   };
 
+  const selectViewFolder = (nombreFolder) => {
+    console.log("Se esta viendo el folder:", nombreFolder);
+    handleView(nombreFolder);
+  };
+
   return (
     <div className="folders">
-      <div className="folder folder-primario">
+      <div
+        className="folder folder-primario"
+        onClick={() => selectViewFolder("Bienvenida")}
+      >
         <div className="nom-folder">Bienvenida</div>
         <div className="delete-folder"></div>
         <div className="ref-folder" style={{ display: "none" }}>
@@ -119,6 +136,7 @@ export default function Folders() {
             nombre_folder={folder}
             openModalDeleteFolder={openModalDeleteFolder}
             selectDelFolder={selectDelFolder}
+            selectViewFolder={selectViewFolder}
           ></Folder>
         );
       })}

@@ -2,9 +2,13 @@ export default function Folder({
   nombre_folder,
   openModalDeleteFolder,
   selectDelFolder,
+  selectViewFolder,
 }) {
   return (
-    <div className="folder folder-primario">
+    <div
+      className="folder folder-primario"
+      onClick={() => selectViewFolder(nombre_folder)}
+    >
       <div className="nom-folder">{nombre_folder}</div>
       <div className="delete-folder">
         <i

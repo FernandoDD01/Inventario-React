@@ -23,11 +23,27 @@ export function folderReducer(state, action) {
     case TYPES.ADD_FOLDER: {
       try {
         setDoc(doc(db, "Folders", `${action.payload}`), {
+          Nombre: `${action.payload}`,
           Categorias: {
-            /*
-            Bebidas: {
+            /* Bebidas: {
+              Color: "rgba(255,253,208,1)",
               Productos: {
-                Producto_1: {
+                Aguas: {
+                  precio: 32,
+                },
+                Refrescos: {
+                  precio: 32,
+                },
+              },
+            },
+            comida: {
+              Color: "rgba(144,160,173,1)",
+
+              Productos: {
+                Carne: {
+                  precio: 32,
+                },
+                Pescado: {
                   precio: 32,
                 },
               },
