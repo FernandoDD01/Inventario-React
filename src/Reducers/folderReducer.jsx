@@ -1,69 +1,43 @@
-import { db } from "../firebase/firebase.js";
-import {
-  collection,
-  addDoc,
-  doc,
-  getDoc,
-  setDoc,
-  deleteDoc,
-} from "firebase/firestore";
-
 import { TYPES } from "../actions/folderActions";
 
-import { Folders } from "../firebase/firebase.js";
-
-//Primero -> Obtener los folders que ya hay en la base de datos
-
-//
-
-export const folderInitialState = { Folders };
-
 export function folderReducer(state, action) {
+  console.log(state);
   switch (action.type) {
     case TYPES.ADD_FOLDER: {
-      try {
-        setDoc(doc(db, "Folders", `${action.payload}`), {
-          Nombre: `${action.payload}`,
-          Categorias: {
-            /* Bebidas: {
-              Color: "rgba(255,253,208,1)",
-              Productos: {
-                Aguas: {
-                  precio: 32,
-                },
-                Refrescos: {
-                  precio: 32,
-                },
-              },
-            },
-            comida: {
-              Color: "rgba(144,160,173,1)",
-
-              Productos: {
-                Carne: {
-                  precio: 32,
-                },
-                Pescado: {
-                  precio: 32,
-                },
-              },
-            },*/
-          },
-        });
-      } catch (error) {
-        console.error(error);
+      console.log("Folder añadido", action.payload);
+      let idLastElement = 0;
+      //Se obtiene el id del ultimo elemento
+      if (state.folders.length === 0) {
+        idLastElement = 0;
       }
 
-      console.log("Folder agregado");
-      return { Folders: [...state.Folders, `${action.payload}`] };
+      if (state.folders.length === 1) {
+        idLastElement = 1;
+      }
+      if (state.folders.length >= 2) {
+        idLastElement = state.folders[state.folders.length - 1].id;
+      }
+
+      return {
+        folders: [
+          ...state.folders,
+          {
+            Nombre: `${action.payload}`,
+            Categorias: {},
+            id: idLastElement + 1,
+          },
+        ],
+      };
     }
 
     case TYPES.DELETE_FOLDER: {
-      deleteDoc(doc(db, "Folders", `${action.payload}`));
+      console.log("Se borro el folder", action.payload);
+
+      //Posibilidad de que se re acomoden los id
 
       return {
-        Folders: state.Folders.filter((folder) => {
-          return folder !== action.payload;
+        folders: state.folders.filter((folder) => {
+          return folder.Nombre !== action.payload;
         }),
       };
     }

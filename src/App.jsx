@@ -19,19 +19,25 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import { FoldersProvider } from "./context/foldersContext";
+import { ViewProvider } from "./context/viewContext";
 
 function App() {
   return (
     <>
-      <Header />
+      <ViewProvider>
+        <FoldersProvider>
+          <Header />
 
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-        </Routes>
-      </BrowserRouter>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Main />}></Route>
+            </Routes>
+          </BrowserRouter>
 
-      <Footer />
+          <Footer />
+        </FoldersProvider>
+      </ViewProvider>
     </>
   );
 }

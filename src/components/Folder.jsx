@@ -1,27 +1,19 @@
-export default function Folder({
-  nombre_folder,
-  openModalDeleteFolder,
-  selectDelFolder,
-  selectViewFolder,
-}) {
+export default function Folder({ folderName, changeView, selectDeleteFolder }) {
+  //           className="bx bxs-message-square-x"
+  const handleFolderClick = (e) => e.stopPropagation();
+
   return (
-    <div
-      className="folder folder-primario"
-      onClick={() => selectViewFolder(nombre_folder)}
-    >
-      <div className="nom-folder">{nombre_folder}</div>
-      <div className="delete-folder">
-        <i
-          className="bx bxs-message-square-x"
-          onClick={() => {
-            openModalDeleteFolder();
-            selectDelFolder(nombre_folder);
-          }}
-        ></i>
+    <>
+      <div className="folder folder-primario" onClick={changeView}>
+        <div className="nom-folder">{folderName}</div>
+        <div className="delete-folder" onClick={handleFolderClick}>
+          <i
+            id={`${folderName}`}
+            className="bx bxs-message-square-x"
+            onClick={selectDeleteFolder}
+          ></i>
+        </div>
       </div>
-      <div className="ref-folder" style={{ display: "none" }}>
-        1
-      </div>
-    </div>
+    </>
   );
 }

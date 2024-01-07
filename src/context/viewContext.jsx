@@ -1,20 +1,19 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useState } from "react";
 
-const ViewContext = createContext();
-const initialView = "Bienvenida";
+const viewInitialState = { view: "Bienvenida" };
 
-const ViewProvider = ({ children }) => {
-  const [view, setView] = useState(initialView);
+export const ViewContext = createContext(viewInitialState);
 
-  function handleView(nombreFolder) {
-    console.log("Se cambio la vista a", nombreFolder);
-    setView(nombreFolder);
-  }
+export const ViewProvider = ({ children }) => {
+  const [view, setView] = useState(viewInitialState);
 
-  const data = { view, handleView };
-
-  return <ViewContext.Provider value={data}>{children}</ViewContext.Provider>;
+  const handleView = (new_view) => {
+    console.log("La vista se cambio a", new_view);
+    setView({ view: `${new_view}` });
+  };
+  return (
+    <ViewContext.Provider value={{ ...view, handleView }}>
+      {children}
+    </ViewContext.Provider>
+  );
 };
-
-export { ViewProvider };
-export default ViewContext;

@@ -36,28 +36,44 @@ export function ModalAddCategory({
   );
 }
 
-/* <div
-      className={`overlay overlay-add-folder ${
-        isActiveModalAddFolder && "active"
+export function ModalEditCategory({
+  children,
+  isActiveModalEditCategory,
+  closeModalEditCategory,
+  resetNombreCategory,
+}) {
+  const handleModalClick = (e) => e.stopPropagation();
+
+  return ReactDOM.createPortal(
+    <div
+      className={`overlay overlay-edit-category ${
+        isActiveModalEditCategory && "active"
       }`}
       id="overlay"
-      onClick={closeModalAddFolder}
+      onClick={() => {
+        closeModalEditCategory();
+        resetNombreCategory();
+      }}
     >
       <div
-        className={`popup popup-add-folder ${
-          isActiveModalAddFolder && "active"
+        className={`popup popup-edit-category ${
+          isActiveModalEditCategory && "active"
         }`}
         id="popup"
         onClick={handleModalClick}
       >
-        <div className="cont-pop-add-folder">
-          <div className="close-window-add-folder">
-            <i
-              className="bx bxs-message-square-x"
-              onClick={closeModalAddFolder}
-            ></i>
-          </div>
+        <div className="cont-pop-edit-category">
+          <i
+            className="bx bxs-message-square-x"
+            onClick={() => {
+              closeModalEditCategory();
+              resetNombreCategory();
+            }}
+          ></i>
           {children}
         </div>
       </div>
-    </div>*/
+    </div>,
+    document.getElementById("modal")
+  );
+}

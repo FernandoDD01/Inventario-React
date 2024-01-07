@@ -4,6 +4,7 @@ export function ModalAddFolder({
   children,
   isActiveModalAddFolder,
   closeModalAddFolder,
+  resetNombreFolder,
 }) {
   const handleModalClick = (e) => e.stopPropagation();
   return ReactDOM.createPortal(
@@ -12,7 +13,10 @@ export function ModalAddFolder({
         isActiveModalAddFolder && "active"
       }`}
       id="overlay"
-      onClick={closeModalAddFolder}
+      onClick={() => {
+        closeModalAddFolder();
+        resetNombreFolder();
+      }}
     >
       <div
         className={`popup popup-add-folder ${
@@ -25,7 +29,10 @@ export function ModalAddFolder({
           <div className="close-window-add-folder">
             <i
               className="bx bxs-message-square-x"
-              onClick={closeModalAddFolder}
+              onClick={() => {
+                closeModalAddFolder();
+                resetNombreFolder();
+              }}
             ></i>
           </div>
           {children}
