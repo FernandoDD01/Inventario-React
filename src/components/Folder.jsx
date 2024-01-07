@@ -1,4 +1,9 @@
-export default function Folder({ folderName, changeView, selectDeleteFolder }) {
+export default function Folder({
+  folderName,
+  changeView,
+  openModalDeleteFolder,
+  setClickDelFolder,
+}) {
   //           className="bx bxs-message-square-x"
   const handleFolderClick = (e) => e.stopPropagation();
 
@@ -8,9 +13,11 @@ export default function Folder({ folderName, changeView, selectDeleteFolder }) {
         <div className="nom-folder">{folderName}</div>
         <div className="delete-folder" onClick={handleFolderClick}>
           <i
-            id={`${folderName}`}
             className="bx bxs-message-square-x"
-            onClick={selectDeleteFolder}
+            onClick={() => {
+              openModalDeleteFolder();
+              setClickDelFolder(folderName);
+            }}
           ></i>
         </div>
       </div>

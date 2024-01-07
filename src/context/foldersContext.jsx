@@ -1,9 +1,9 @@
 import { createContext, useReducer } from "react";
-//import { folders } from "../mookData.json/data.json";
+import { folders } from "../mookData.json/data.json";
 import { folderReducer } from "../Reducers/folderReducer";
 import { TYPES } from "../actions/folderActions";
 
-const folders = [];
+//const folders = [];
 
 const foldersInitialState = { folders };
 

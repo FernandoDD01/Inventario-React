@@ -3,28 +3,30 @@
     {
       "id": 1,
       "Nombre": "Casa",
-      "Categories": {}
+      "Categorias": []
     },
     {
       "id": 2,
       "Nombre": "Garage",
-      "Categories": {
-        "Herramientas": { "Color": "yellow", "Productos": {} }
-      }
+      "Categorias": [{ "Herramientas": { "Color": "yellow", "Productos": [] } }]
     },
     {
       "id": 3,
       "Nombre": "Baño",
-      "Categories": {
-        "Piso": {
-          "Color": "orange",
-          "Productos": { "jabon": { "precio": 100 } }
+      "Categorias": [
+        {
+          "Piso": {
+            "Color": "orange",
+            "Productos": [{ "jabon": [{ "precio": 100 }] }]
+          }
         },
-        "Espejo": {
-          "Color": "blue",
-          "Productos": { "liquido": { "precio": 500 } }
+        {
+          "Espejo": {
+            "Color": "blue",
+            "Productos": [{ "liquido": [{ "precio": 500 }] }]
+          }
         }
-      }
+      ]
     }
   ]
 }
