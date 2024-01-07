@@ -4,6 +4,7 @@ export function ModalAddCategory({
   children,
   isActiveModalAddCategory,
   closeModalAddCategory,
+  resetWarnings,
 }) {
   const handleModalClick = (e) => e.stopPropagation();
   return ReactDOM.createPortal(
@@ -12,7 +13,10 @@ export function ModalAddCategory({
         isActiveModalAddCategory && "active"
       }`}
       id="overlay"
-      onClick={closeModalAddCategory}
+      onClick={() => {
+        closeModalAddCategory();
+        resetWarnings();
+      }}
     >
       <div
         className={`popup popup-add-category ${
@@ -25,7 +29,10 @@ export function ModalAddCategory({
           <div className="close-window-add-folder">
             <i
               className="bx bxs-message-square-x"
-              onClick={closeModalAddCategory}
+              onClick={() => {
+                closeModalAddCategory();
+                resetWarnings();
+              }}
             ></i>
           </div>
           {children}

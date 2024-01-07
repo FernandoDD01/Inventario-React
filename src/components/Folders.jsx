@@ -69,6 +69,15 @@ export default function Folders() {
     });
   };
 
+  const resetWarnings = () => {
+    setWarningAddFolder({
+      void: false,
+      duplicate: false,
+      withSpaces: false,
+    });
+    setInput({ Nombre: "" });
+  };
+
   const changeView = (e) => {
     console.log(e.target.textContent);
     handleView(e.target.textContent);
@@ -126,6 +135,7 @@ export default function Folders() {
       <ModalAddFolder
         isActiveModalAddFolder={isActiveModalAddFolder}
         closeModalAddFolder={closeModalAddFolder}
+        resetWarnings={resetWarnings}
       >
         <div>
           <h2>Agregar folder</h2>

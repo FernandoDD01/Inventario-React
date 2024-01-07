@@ -21,8 +21,18 @@ export const FoldersProvider = ({ children }) => {
     console.log("Se borró el folder", folder);
     dispatch({ type: TYPES.DELETE_FOLDER, payload: `${folder}` });
   };
+
+  const addCategory = (category, view) => {
+    console.log("Se agregó la categoria (contexto)", category.Nombre);
+    dispatch({
+      type: TYPES.ADD_CATEGORY,
+      payload: { Nombre: `${category.Nombre}`, View: `${view}` },
+    });
+  };
   return (
-    <FoldersContext.Provider value={{ ...state, addFolder, deleteFolder }}>
+    <FoldersContext.Provider
+      value={{ ...state, addFolder, deleteFolder, addCategory }}
+    >
       {children}
     </FoldersContext.Provider>
   );

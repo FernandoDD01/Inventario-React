@@ -4,6 +4,7 @@ export function ModalAddFolder({
   children,
   isActiveModalAddFolder,
   closeModalAddFolder,
+  resetWarnings,
 }) {
   const handleModalClick = (e) => e.stopPropagation();
   return ReactDOM.createPortal(
@@ -13,6 +14,7 @@ export function ModalAddFolder({
       }`}
       id="overlay"
       onClick={() => {
+        resetWarnings();
         closeModalAddFolder();
       }}
     >
@@ -28,6 +30,8 @@ export function ModalAddFolder({
             <i
               className="bx bxs-message-square-x"
               onClick={() => {
+                resetWarnings();
+
                 closeModalAddFolder();
               }}
             ></i>
