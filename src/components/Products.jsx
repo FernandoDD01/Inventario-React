@@ -1,6 +1,7 @@
 import Product from "./Product";
 
-export default function Products({ productos, color }) {
+export default function Products({ products, color }) {
+  console.log(products);
   return (
     <div
       className="product-list-content"
@@ -15,17 +16,8 @@ export default function Products({ productos, color }) {
       </div>
       <div className="separador-header"></div>
 
-      {console.log(Object.keys(productos)[0])}
-      {/*console.log(Object.values(productos))*/}
-
-      {Object.values(productos).map((product, index) => {
-        return (
-          <Product
-            key={index}
-            product={product}
-            productName={Object.keys(productos)[index]}
-          ></Product>
-        );
+      {products.map((product) => {
+        return <Product product={product}></Product>;
       })}
 
       <div className="separador-footer"></div>

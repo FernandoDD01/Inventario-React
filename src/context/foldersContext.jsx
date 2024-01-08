@@ -29,9 +29,17 @@ export const FoldersProvider = ({ children }) => {
       payload: { Nombre: `${category.Nombre}`, View: `${view}` },
     });
   };
+
+  const deleteCategory = (category, view) => {
+    console.log("Se borro la categoria", category, "En la vista:", view);
+    dispatch({
+      type: TYPES.DELETE_CATEGORY,
+      payload: { Nombre: `${category}`, View: `${view}` },
+    });
+  };
   return (
     <FoldersContext.Provider
-      value={{ ...state, addFolder, deleteFolder, addCategory }}
+      value={{ ...state, addFolder, deleteFolder, addCategory, deleteCategory }}
     >
       {children}
     </FoldersContext.Provider>

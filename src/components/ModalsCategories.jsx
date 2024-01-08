@@ -43,6 +43,31 @@ export function ModalAddCategory({
   );
 }
 
+export function ModalDeleteCategory({ children, isActiveModalDeleteCategory }) {
+  const handleModalClick = (e) => e.stopPropagation();
+
+  return ReactDOM.createPortal(
+    <div
+      className={`overlay overlay-delete-folder ${
+        isActiveModalDeleteCategory && "active"
+      }`}
+      id="overlay"
+    >
+      <div
+        className={`popup popup-delete-folder ${
+          isActiveModalDeleteCategory && "active"
+        }`}
+        id="popup"
+        onClick={handleModalClick}
+      >
+        <div className="cont-pop-delete-folder">{children}</div>
+      </div>
+    </div>,
+
+    document.getElementById("modal")
+  );
+}
+
 export function ModalEditCategory({
   children,
   isActiveModalEditCategory,

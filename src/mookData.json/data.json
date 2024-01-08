@@ -17,13 +17,29 @@
         {
           "Piso": {
             "Color": "orange",
-            "Productos": [{ "jabon": [{ "precio": 100 }] }]
+            "Productos": [
+              {
+                "Nombre": "Jabon",
+                "Precio": 5000,
+                "Cantidad": 132,
+                "Enlace": "https://google.com",
+                "Nota": "Esto es una nota de prueba"
+              }
+            ]
           }
         },
         {
           "Espejo": {
             "Color": "blue",
-            "Productos": [{ "liquido": [{ "precio": 500 }] }]
+            "Productos": [
+              {
+                "Nombre": "Liquido",
+                "Precio": 30,
+                "Cantidad": 4,
+                "Enlace": "https://google.com",
+                "Nota": ""
+              }
+            ]
           }
         }
       ]

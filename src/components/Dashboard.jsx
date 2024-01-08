@@ -3,21 +3,27 @@ import { FoldersContext } from "../context/foldersContext";
 import { ViewContext } from "../context/viewContext";
 
 import Category from "./Category";
-import { ModalAddCategory } from "./ModalsCategories";
+import { ModalAddCategory, ModalDeleteCategory } from "./ModalsCategories";
 import useModal from "../hooks/useModal";
 
 export default function Dashboard() {
   //Traemos los contextos de los folders y de la vista
-  const { folders, addFolder, deleteFolder, addCategory } =
+  const { folders, addFolder, deleteFolder, addCategory, deleteCategory } =
     useContext(FoldersContext); //En los folders se encuentra la data principal
   const { view } = useContext(ViewContext); //en la vista esta el folder en el que nos encontramos actualmente
 
   const [inputNewCategory, setInputNewCategory] = useState({ Nombre: "" });
-
+  const [selectDeleteCategory, setSelectDeleteCategory] = useState("");
   const [
     isActiveModalAddCategory,
     openModalAddCategory,
     closeModalAddCategory,
+  ] = useModal(false);
+
+  const [
+    isActiveModalDeleteCategory,
+    openModalDeleteCategory,
+    closeModalDeleteCategory,
   ] = useModal(false);
 
   const [warningAddCategory, setWarningAddCategory] = useState({
@@ -96,6 +102,10 @@ export default function Dashboard() {
     });
   };
 
+  const handleSelectDeleteCategory = (nombre) => {
+    setSelectDeleteCategory(nombre);
+  };
+
   return (
     <>
       {view === "Bienvenida" ? (
@@ -124,6 +134,9 @@ export default function Dashboard() {
                   categoryName={Object.keys(categoria)[0]}
                   color={categoria[Object.keys(categoria)[0]].Color}
                   products={categoria[Object.keys(categoria)[0]].Productos}
+                  handleSelectDeleteCategory={handleSelectDeleteCategory}
+                  view={view}
+                  openModalDeleteCategory={openModalDeleteCategory}
                 ></Category>
               );
             })
@@ -181,6 +194,29 @@ export default function Dashboard() {
           </button>
         </form>
       </ModalAddCategory>
+
+      <ModalDeleteCategory
+        isActiveModalDeleteCategory={isActiveModalDeleteCategory}
+      >
+        <label className="element-pop-delete">
+          Desea eliminar el folder: Nombre
+        </label>
+        <div
+          className="confirm-delete-folder element-pop-delete-folder"
+          onClick={() => {
+            deleteCategory(selectDeleteCategory, view);
+            closeModalDeleteCategory();
+          }}
+        >
+          Eliminar
+        </div>
+        <div
+          className="cancel-delete-folder element-pop-delete-folder"
+          onClick={closeModalDeleteCategory}
+        >
+          Cancelar
+        </div>
+      </ModalDeleteCategory>
     </>
   );
 }

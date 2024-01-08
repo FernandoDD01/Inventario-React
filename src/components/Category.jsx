@@ -1,6 +1,14 @@
 import React from "react";
+import Products from "./Products";
 
-export default function Category({ color, categoryName, products }) {
+export default function Category({
+  color,
+  categoryName,
+  products,
+  handleSelectDeleteCategory,
+  view,
+  openModalDeleteCategory,
+}) {
   console.log(color);
   console.log(categoryName);
   console.log(products);
@@ -26,7 +34,13 @@ export default function Category({ color, categoryName, products }) {
 
         <div className="toolbar-right">
           <i className="bx bx-plus bx-md bx-tada-hover add-product"></i>
-          <i className="bx bxs-trash bx-md bx-tada-hover delete"></i>
+          <i
+            className="bx bxs-trash bx-md bx-tada-hover delete"
+            onClick={() => {
+              openModalDeleteCategory();
+              handleSelectDeleteCategory(categoryName);
+            }}
+          ></i>
         </div>
       </div>
       <div className="referencia" style={{ display: "none" }}>
@@ -34,12 +48,8 @@ export default function Category({ color, categoryName, products }) {
       </div>
       <div className="refProduc" style={{ display: "none" }}></div>
       <div className="contenedor-tabla">
-        {products.length == 0 ? (
-          <p>No tiene productos</p>
-        ) : (
-          products.map((producto) => {
-            return <div>{Object.keys(producto)[0]}</div>;
-          })
+        {products.length !== 0 && (
+          <Products products={products} color={color}></Products>
         )}
       </div>
     </div>

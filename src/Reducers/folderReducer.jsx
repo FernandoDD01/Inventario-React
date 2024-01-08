@@ -99,6 +99,44 @@ export function folderReducer(state, action) {
       };
     }
 
+    case TYPES.DELETE_CATEGORY: {
+      console.log("La categoria fue borrada");
+
+      console.log(state.folders);
+      console.log(action.payload.Nombre);
+
+      console.log(
+        state.folders
+          .find((folder) => {
+            return folder.Nombre === action.payload.View;
+          })
+          .Categorias.filter((categoria) => {
+            return Object.keys(categoria)[0] !== action.payload.Nombre;
+          })
+      );
+
+      return {
+        folders: state.folders.map((folder) => {
+          console.log(folder);
+          console.log(action.payload.View);
+
+          console.log(folder.Categorias);
+          return folder.Nombre === action.payload.View
+            ? {
+                ...folder,
+                Categorias: state.folders
+                  .find((folder) => {
+                    return folder.Nombre === action.payload.View;
+                  })
+                  .Categorias.filter((categoria) => {
+                    return Object.keys(categoria)[0] !== action.payload.Nombre;
+                  }),
+              }
+            : folder;
+        }),
+      };
+    }
+
     default:
       return state;
   }
