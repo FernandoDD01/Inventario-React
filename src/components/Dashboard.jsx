@@ -199,7 +199,7 @@ export default function Dashboard() {
         isActiveModalDeleteCategory={isActiveModalDeleteCategory}
       >
         <label className="element-pop-delete">
-          Desea eliminar el folder: Nombre
+          Desea eliminar la categoría: {selectDeleteCategory}
         </label>
         <div
           className="confirm-delete-folder element-pop-delete-folder"

@@ -38,12 +38,34 @@ export const FoldersProvider = ({ children }) => {
     });
   };
 
+  const editCategory = (category, new_categoryName, view) => {
+    dispatch({
+      type: TYPES.EDIT_CATEGORY,
+      payload: { Name: category, New_name: new_categoryName, View: view },
+    });
+  };
+
   const addProduct = (product, category, view) => {
     dispatch({
       type: TYPES.ADD_PRODUCT,
       payload: { Product: product, Category: category, View: view },
     });
   };
+
+  const deleteProduct = (product, category, view) => {
+    dispatch({
+      type: TYPES.DELETE_PRODUCT,
+      payload: { Product: product, Category: category, View: view },
+    });
+  };
+
+  const editNote = (note, product, category, view) => {
+    dispatch({
+      type: TYPES.EDIT_NOTE,
+      payload: { Note: note, Product: product, Category: category, View: view },
+    });
+  };
+
   return (
     <FoldersContext.Provider
       value={{
@@ -53,6 +75,10 @@ export const FoldersProvider = ({ children }) => {
         addCategory,
         deleteCategory,
         addProduct,
+        deleteProduct,
+        editCategory,
+
+        editNote,
       }}
     >
       {children}

@@ -3,6 +3,7 @@ import Products from "./Products";
 import { FoldersContext } from "../context/foldersContext";
 import { ModalAddProduct } from "./ModalProducts";
 import useModal from "../hooks/useModal";
+import { ModalEditCategory } from "./ModalsCategories";
 
 export default function Category({
   color,
@@ -12,10 +13,16 @@ export default function Category({
   view,
   openModalDeleteCategory,
 }) {
-  const { folders, addProduct } = useContext(FoldersContext);
+  const { folders, addProduct, editCategory } = useContext(FoldersContext);
 
   const [isActiveModalAddProduct, openModalAddProduct, closeModalAddProduct] =
     useModal(false);
+
+  const [
+    isActiveModalEditCategory,
+    openModalEditCategory,
+    closeModalEditCategory,
+  ] = useModal(false);
 
   const [dropdown, setdropdown] = useState(true);
 
@@ -27,7 +34,17 @@ export default function Category({
     Nota: "",
   });
 
+  const [inputEditCategory, setInputEditCategory] = useState({ Nombre: "" });
+
   const [warningAddProduct, setWarningAddProduct] = useState({
+    void: false,
+    duplicate: false,
+    withSpaces: false,
+    cero: false,
+    negative: false,
+  });
+
+  const [warningEditCategory, setWarningEditCategory] = useState({
     void: false,
     duplicate: false,
     withSpaces: false,
@@ -38,6 +55,13 @@ export default function Category({
   const handleChange = (e) => {
     setInputNewProduct({
       ...inputNewProduct,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleChangeEdit = (e) => {
+    setInputEditCategory({
+      ...inputEditCategory,
       [e.target.name]: e.target.value,
     });
   };
@@ -99,6 +123,40 @@ export default function Category({
     addProduct(inputNewProduct, categoryName, view);
   };
 
+  const handleSubmitEditCategory = (e) => {
+    e.preventDefault();
+
+    if (inputEditCategory.Nombre === "") {
+      setWarningEditCategory({ ...warningEditCategory, void: true });
+      return;
+    }
+
+    const findfolder = folders.find((folder) => {
+      return folder.Nombre === view;
+    });
+
+    const findName = findfolder.Categorias.some((el) => {
+      return Object.keys(el)[0] === inputEditCategory.Nombre;
+    });
+    console.log(Object.keys(findfolder.Categorias));
+    console.log(findName);
+
+    if (findName === true) {
+      setWarningEditCategory({ ...warningEditCategory, duplicate: true });
+      return;
+    }
+
+    if (inputEditCategory.Nombre.includes(" ")) {
+      setWarningEditCategory({ ...warningEditCategory, withSpaces: true });
+      return;
+    }
+
+    closeModalEditCategory();
+
+    editCategory(categoryName, inputEditCategory.Nombre, view);
+    resetWarningsEditCategory();
+  };
+
   const resetWarnings = () => {
     setInputNewProduct({
       Nombre: "",
@@ -114,12 +172,29 @@ export default function Category({
     });
   };
 
+  const resetWarningsEditCategory = () => {
+    setInputEditCategory({ Nombre: "" });
+    setWarningEditCategory({
+      void: false,
+      duplicate: false,
+      withSpaces: false,
+    });
+  };
+
   return (
     <>
       <div className="category-content">
         <div
           className={`etiqueta-category ${dropdown ? "active" : "close"}`}
-          style={{ backgroundColor: `${color}` }}
+          style={{
+            backgroundColor: `${color}`,
+            borderBottomLeftRadius: `${
+              dropdown && products.length !== 0 ? "0px" : "20px"
+            }`,
+            borderBottomRightRadius: `${
+              dropdown && products.length !== 0 ? "0px" : "20px"
+            }`,
+          }}
         >
           <div className="toolbar-left">
             <i
@@ -137,7 +212,10 @@ export default function Category({
           <div className="nombre-categoria">
             <label className="etiqueta-nombre">{categoryName}</label>
             <div className="edit-category">
-              <i className="bx bx-edit bx-sm"></i>
+              <i
+                className="bx bx-edit bx-sm"
+                onClick={openModalEditCategory}
+              ></i>
             </div>
           </div>
 
@@ -161,7 +239,11 @@ export default function Category({
         <div className="refProduc" style={{ display: "none" }}></div>
         <div className={`contenedor-tabla ${dropdown ? "active" : "close"}`}>
           {products.length !== 0 && (
-            <Products products={products} color={color}></Products>
+            <Products
+              categoryName={categoryName}
+              products={products}
+              color={color}
+            ></Products>
           )}
         </div>
       </div>
@@ -275,6 +357,57 @@ export default function Category({
           </button>
         </form>
       </ModalAddProduct>
+
+      <ModalEditCategory
+        isActiveModalEditCategory={isActiveModalEditCategory}
+        closeModalEditCategory={closeModalEditCategory}
+        resetWarningsEditCategory={resetWarningsEditCategory}
+      >
+        <div>
+          <h2>Editar categoría</h2>
+        </div>
+
+        <form onSubmit={handleSubmitEditCategory}>
+          {warningEditCategory.void === true && (
+            <p
+              className="adver-categoria"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              El nombre es un campo obligatorio
+            </p>
+          )}
+
+          {warningEditCategory.duplicate === true && (
+            <p
+              className="adver-categoria"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              El nombre ya esta en uso
+            </p>
+          )}
+
+          {warningEditCategory.withSpaces === true && (
+            <p
+              className="adver-categoria"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              El nombre no puede contener espacios
+            </p>
+          )}
+          <input
+            type="text"
+            className="input-new-edit-category"
+            placeholder="Nuevo nombre de la categoria"
+            name="Nombre"
+            onChange={handleChangeEdit}
+            value={inputEditCategory.Nombre}
+          />
+
+          <button className="btn-edit-category" type="submit">
+            Editar
+          </button>
+        </form>
+      </ModalEditCategory>
     </>
   );
 }

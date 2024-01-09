@@ -138,6 +138,39 @@ export function folderReducer(state, action) {
       };
     }
 
+    case TYPES.EDIT_CATEGORY: {
+      console.log(
+        "Se edito la categoria:",
+        action.payload.Name,
+        "a",
+        action.payload.New_name,
+        "en la vista",
+        action.payload.View
+      );
+
+      let clone = structuredClone(state.folders);
+
+      clone.map((folder) => {
+        console.log(folder);
+        return folder.Nombre === action.payload.View
+          ? folder.Categorias.map((categoria) => {
+              console.log(folder.Categorias);
+              return Object.keys(categoria)[0] === action.payload.Name
+                ? ((categoria[action.payload.New_name] =
+                    categoria[Object.keys(categoria)[0]]),
+                  delete categoria[Object.keys(categoria)[0]])
+                : categoria;
+            })
+          : folder;
+      });
+
+      console.log("Así quedo el nombre editado", clone);
+
+      return {
+        folders: clone,
+      };
+    }
+
     case TYPES.ADD_PRODUCT: {
       console.log(
         "se agregó el producto:",
@@ -163,6 +196,89 @@ export function folderReducer(state, action) {
             })
           : folder;
       });
+
+      return {
+        folders: clone,
+      };
+    }
+
+    case TYPES.DELETE_PRODUCT: {
+      console.log(
+        "se eliminó el producto:",
+        action.payload.Product,
+        "En la categoria:",
+        action.payload.Category,
+        "de la vista:",
+        action.payload.View
+      );
+
+      let clone = structuredClone(state.folders);
+
+      clone.map((folder) => {
+        console.log(folder);
+        return folder.Nombre === action.payload.View
+          ? folder.Categorias.map((categoria) => {
+              console.log(folder.Categorias);
+              return Object.keys(categoria)[0] === action.payload.Category
+                ? (Object.values(categoria)[0].Productos = Object.values(
+                    clone
+                      .find((folder) => {
+                        return folder.Nombre === action.payload.View;
+                      })
+                      .Categorias.find((categoria) => {
+                        return (
+                          Object.keys(categoria)[0] === action.payload.Category
+                        );
+                      })
+                  )[0].Productos.filter((producto) => {
+                    return producto.Nombre !== action.payload.Product;
+                  }))
+                : categoria;
+            })
+          : folder;
+      });
+
+      console.log("Así quedó clone", clone);
+
+      return {
+        folders: clone,
+      };
+    }
+
+    case TYPES.EDIT_NOTE: {
+      console.log(
+        "La nueva nota es:",
+        action.payload.Note,
+        "del producto",
+        action.payload.Product,
+
+        "de la categoria",
+        action.payload.Category,
+
+        "de la vista",
+        action.payload.View
+      );
+
+      let clone = structuredClone(state.folders);
+
+      clone.map((folder) => {
+        console.log(folder);
+        return folder.Nombre === action.payload.View
+          ? folder.Categorias.map((categoria) => {
+              console.log(folder.Categorias);
+              return Object.keys(categoria)[0] === action.payload.Category
+                ? Object.values(categoria)[0].Productos.map((producto) => {
+                    console.log(producto);
+                    return producto.Nombre === action.payload.Product
+                      ? (producto.Nota = action.payload.Note)
+                      : producto;
+                  })
+                : categoria;
+            })
+          : folder;
+      });
+
+      console.log("Así quedó clone", clone);
 
       return {
         folders: clone,

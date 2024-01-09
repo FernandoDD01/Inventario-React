@@ -72,7 +72,7 @@ export function ModalEditCategory({
   children,
   isActiveModalEditCategory,
   closeModalEditCategory,
-  resetNombreCategory,
+  resetWarningsEditCategory,
 }) {
   const handleModalClick = (e) => e.stopPropagation();
 
@@ -84,7 +84,7 @@ export function ModalEditCategory({
       id="overlay"
       onClick={() => {
         closeModalEditCategory();
-        resetNombreCategory();
+        resetWarningsEditCategory();
       }}
     >
       <div
@@ -96,10 +96,10 @@ export function ModalEditCategory({
       >
         <div className="cont-pop-edit-category">
           <i
-            className="bx bxs-message-square-x"
+            className="bx bxs-message-square-x bx-md"
             onClick={() => {
               closeModalEditCategory();
-              resetNombreCategory();
+              resetWarningsEditCategory();
             }}
           ></i>
           {children}

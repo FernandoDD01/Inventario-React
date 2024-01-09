@@ -1,6 +1,6 @@
 import Product from "./Product";
 
-export default function Products({ products, color }) {
+export default function Products({ categoryName, products, color }) {
   console.log(products);
 
   const modifyColorOpacity = (color) => {
@@ -37,8 +37,14 @@ export default function Products({ products, color }) {
       </div>
       <div className="separador-header"></div>
 
-      {products.map((product) => {
-        return <Product product={product}></Product>;
+      {products.map((product, index) => {
+        return (
+          <Product
+            categoryName={categoryName}
+            key={index}
+            product={product}
+          ></Product>
+        );
       })}
 
       <div className="separador-footer"></div>
