@@ -37,9 +37,23 @@ export const FoldersProvider = ({ children }) => {
       payload: { Nombre: `${category}`, View: `${view}` },
     });
   };
+
+  const addProduct = (product, category, view) => {
+    dispatch({
+      type: TYPES.ADD_PRODUCT,
+      payload: { Product: product, Category: category, View: view },
+    });
+  };
   return (
     <FoldersContext.Provider
-      value={{ ...state, addFolder, deleteFolder, addCategory, deleteCategory }}
+      value={{
+        ...state,
+        addFolder,
+        deleteFolder,
+        addCategory,
+        deleteCategory,
+        addProduct,
+      }}
     >
       {children}
     </FoldersContext.Provider>

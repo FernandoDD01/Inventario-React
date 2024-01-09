@@ -8,7 +8,11 @@
     {
       "id": 2,
       "Nombre": "Garage",
-      "Categorias": [{ "Herramientas": { "Color": "yellow", "Productos": [] } }]
+      "Categorias": [
+        {
+          "Herramientas": { "Color": "rgba(250, 128, 114,1)", "Productos": [] }
+        }
+      ]
     },
     {
       "id": 3,
@@ -16,7 +20,7 @@
       "Categorias": [
         {
           "Piso": {
-            "Color": "orange",
+            "Color": "rgba(255, 228, 196,1)",
             "Productos": [
               {
                 "Nombre": "Jabon",
@@ -30,7 +34,7 @@
         },
         {
           "Espejo": {
-            "Color": "blue",
+            "Color": "rgba(255, 244, 174,1)",
             "Productos": [
               {
                 "Nombre": "Liquido",

@@ -89,9 +89,6 @@ footer div {
   align-self: start;
 }
 
-.sub-content {
-}
-
 /* Diseño de categorias*/
 
 .category-content {
@@ -110,7 +107,9 @@ footer div {
   justify-content: space-between;
   align-items: center;
   background-color: orangered;
-  border-radius: 20px;
+
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 .toolbar-right {

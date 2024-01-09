@@ -1,4 +1,5 @@
 import { TYPES } from "../actions/folderActions";
+import Product from "../components/Product";
 
 export function folderReducer(state, action) {
   console.log(state);
@@ -134,6 +135,37 @@ export function folderReducer(state, action) {
               }
             : folder;
         }),
+      };
+    }
+
+    case TYPES.ADD_PRODUCT: {
+      console.log(
+        "se agregó el producto:",
+        action.payload.Product,
+        "En la categoria:",
+        action.payload.Category,
+        "de la vista:",
+        action.payload.View
+      );
+
+      let clone = structuredClone(state.folders);
+
+      clone.map((folder) => {
+        console.log(folder);
+        return folder.Nombre === action.payload.View
+          ? folder.Categorias.map((categoria) => {
+              console.log(folder.Categorias);
+              return Object.keys(categoria)[0] === action.payload.Category
+                ? Object.values(categoria)[0].Productos.push(
+                    action.payload.Product
+                  )
+                : categoria;
+            })
+          : folder;
+      });
+
+      return {
+        folders: clone,
       };
     }
 

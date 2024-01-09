@@ -2,10 +2,31 @@ import Product from "./Product";
 
 export default function Products({ products, color }) {
   console.log(products);
+
+  const modifyColorOpacity = (color) => {
+    let rgb = color.toString();
+
+    let valores = rgb
+      .substring(rgb.indexOf("(") + 1, rgb.lastIndexOf(")"))
+      .split(",");
+
+    // Obtener los valores de rojo, verde y azul
+    let rojo = parseInt(valores[0]);
+    let verde = parseInt(valores[1]);
+    let azul = parseInt(valores[2]);
+    let opacidad = "0.3";
+
+    // Construir el nuevo color RGBA
+    color = "rgba(" + rojo + ", " + verde + ", " + azul + ", " + opacidad + ")";
+    return color;
+  };
+
+  const new_color = modifyColorOpacity(color);
+
   return (
     <div
       className="product-list-content"
-      style={{ backgroundColor: `${color}` }}
+      style={{ backgroundColor: `${new_color}` }}
     >
       <div className="header-table">
         <div className="nom-reg">Producto</div>
