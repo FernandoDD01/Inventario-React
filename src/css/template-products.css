@@ -87,6 +87,10 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.separador-header.dark {
+  background-color: white;
+}
 .separador-footer {
   order: 9999999;
   width: 90%;
@@ -94,6 +98,10 @@
   height: 3px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.separador-footer.dark {
+  background-color: white;
 }
 
 .footer-table {

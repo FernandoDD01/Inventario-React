@@ -26,6 +26,7 @@
                 "Nombre": "Jabon",
                 "Precio": 5000,
                 "Cantidad": 132,
+                "Unidad": "Pza",
                 "Enlace": "https://google.com",
                 "Nota": "Esto es una nota de prueba"
               }
@@ -40,6 +41,7 @@
                 "Nombre": "Liquido",
                 "Precio": 30,
                 "Cantidad": 4,
+                "Unidad": "Kg",
                 "Enlace": "https://google.com",
                 "Nota": ""
               }

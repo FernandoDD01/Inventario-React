@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import ReactDOM from "react-dom";
+import { ThemeContext } from "../context/themeContext";
 
 export function ModalAddCategory({
   children,
@@ -6,10 +8,11 @@ export function ModalAddCategory({
   closeModalAddCategory,
   resetWarnings,
 }) {
+  const { theme } = useContext(ThemeContext);
   const handleModalClick = (e) => e.stopPropagation();
   return ReactDOM.createPortal(
     <div
-      className={`overlay overlay-add-category ${
+      className={`overlay overlay-add-category  ${
         isActiveModalAddCategory && "active"
       }`}
       id="overlay"
@@ -20,15 +23,15 @@ export function ModalAddCategory({
     >
       <div
         className={`popup popup-add-category ${
-          isActiveModalAddCategory && "active"
-        }`}
+          theme.darkmode ? "dark" : "light"
+        } ${isActiveModalAddCategory && "active"}`}
         id="popup"
         onClick={handleModalClick}
       >
         <div className="cont-pop-category">
           <div className="close-window-add-folder">
             <i
-              className="bx bxs-message-square-x"
+              className="bx bx-x"
               onClick={() => {
                 closeModalAddCategory();
                 resetWarnings();
@@ -44,19 +47,21 @@ export function ModalAddCategory({
 }
 
 export function ModalDeleteCategory({ children, isActiveModalDeleteCategory }) {
+  const { theme } = useContext(ThemeContext);
+
   const handleModalClick = (e) => e.stopPropagation();
 
   return ReactDOM.createPortal(
     <div
-      className={`overlay overlay-delete-folder ${
+      className={`overlay overlay-delete-folder  ${
         isActiveModalDeleteCategory && "active"
       }`}
       id="overlay"
     >
       <div
         className={`popup popup-delete-folder ${
-          isActiveModalDeleteCategory && "active"
-        }`}
+          theme.darkmode ? "dark" : "light"
+        } ${isActiveModalDeleteCategory && "active"}`}
         id="popup"
         onClick={handleModalClick}
       >
@@ -74,11 +79,13 @@ export function ModalEditCategory({
   closeModalEditCategory,
   resetWarningsEditCategory,
 }) {
+  const { theme } = useContext(ThemeContext);
+
   const handleModalClick = (e) => e.stopPropagation();
 
   return ReactDOM.createPortal(
     <div
-      className={`overlay overlay-edit-category ${
+      className={`overlay overlay-edit-category  ${
         isActiveModalEditCategory && "active"
       }`}
       id="overlay"
@@ -89,19 +96,22 @@ export function ModalEditCategory({
     >
       <div
         className={`popup popup-edit-category ${
-          isActiveModalEditCategory && "active"
-        }`}
+          theme.darkmode ? "dark" : "light"
+        } ${isActiveModalEditCategory && "active"}`}
         id="popup"
         onClick={handleModalClick}
       >
         <div className="cont-pop-edit-category">
-          <i
-            className="bx bxs-message-square-x bx-md"
-            onClick={() => {
-              closeModalEditCategory();
-              resetWarningsEditCategory();
-            }}
-          ></i>
+          <div className="close-window-add-folder">
+            <i
+              className="bx bx-x bx-md"
+              onClick={() => {
+                closeModalEditCategory();
+                resetWarningsEditCategory();
+              }}
+            ></i>
+          </div>
+
           {children}
         </div>
       </div>

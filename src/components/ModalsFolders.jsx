@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import ReactDOM from "react-dom";
+import { ThemeContext } from "../context/themeContext";
 
 export function ModalAddFolder({
   children,
@@ -6,12 +8,13 @@ export function ModalAddFolder({
   closeModalAddFolder,
   resetWarnings,
 }) {
+  const { theme } = useContext(ThemeContext);
   const handleModalClick = (e) => e.stopPropagation();
   return ReactDOM.createPortal(
     <div
-      className={`overlay overlay-add-folder ${
+      className={`overlay overlay-add-folder  ${
         isActiveModalAddFolder && "active"
-      }`}
+      } `}
       id="overlay"
       onClick={() => {
         resetWarnings();
@@ -20,8 +23,8 @@ export function ModalAddFolder({
     >
       <div
         className={`popup popup-add-folder ${
-          isActiveModalAddFolder && "active"
-        }`}
+          theme.darkmode ? "dark" : "light"
+        } ${isActiveModalAddFolder && "active"}`}
         id="popup"
         onClick={handleModalClick}
       >
@@ -46,7 +49,7 @@ export function ModalAddFolder({
 
 export function ModalDeleteFolder({ children, isActiveModalDeleteFolder }) {
   const handleModalClick = (e) => e.stopPropagation();
-
+  const { theme } = useContext(ThemeContext);
   return ReactDOM.createPortal(
     <div
       className={`overlay overlay-delete-folder ${
@@ -56,8 +59,8 @@ export function ModalDeleteFolder({ children, isActiveModalDeleteFolder }) {
     >
       <div
         className={`popup popup-delete-folder ${
-          isActiveModalDeleteFolder && "active"
-        }`}
+          theme.darkmode ? "dark" : "light"
+        } ${isActiveModalDeleteFolder && "active"}`}
         id="popup"
         onClick={handleModalClick}
       >

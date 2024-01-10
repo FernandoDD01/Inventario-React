@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import ReactDOM from "react-dom";
+import { ThemeContext } from "../context/themeContext";
 
 export function ModalAddProduct({
   children,
@@ -6,6 +8,7 @@ export function ModalAddProduct({
   closeModalAddProduct,
   resetWarnings,
 }) {
+  const { theme } = useContext(ThemeContext);
   const handleModalClick = (e) => e.stopPropagation();
   return ReactDOM.createPortal(
     <div
@@ -20,15 +23,15 @@ export function ModalAddProduct({
     >
       <div
         className={`popup popup-add-product ${
-          isActiveModalAddProduct && "active"
-        }`}
+          theme.darkmode ? "dark" : "light"
+        } ${isActiveModalAddProduct && "active"}`}
         id="popup"
         onClick={handleModalClick}
       >
         <div className="cont-pop-product">
           <div className="close-window-product">
             <i
-              className="bx bxs-message-square-x"
+              className="bx bx-x"
               onClick={() => {
                 closeModalAddProduct();
                 resetWarnings();
@@ -48,6 +51,8 @@ export function ModalDeleteProduct({
   isActiveModalDeleteProduct,
   closeModalDeleteProduct,
 }) {
+  const { theme } = useContext(ThemeContext);
+
   const handleModalClick = (e) => e.stopPropagation();
   return ReactDOM.createPortal(
     <div
@@ -56,7 +61,9 @@ export function ModalDeleteProduct({
       onClick={closeModalDeleteProduct}
     >
       <div
-        className={`popup  ${isActiveModalDeleteProduct && "active"}`}
+        className={`popup  ${theme.darkmode ? "dark" : "light"} ${
+          isActiveModalDeleteProduct && "active"
+        }`}
         id="popup"
         onClick={handleModalClick}
       >
@@ -74,6 +81,8 @@ export function ModalNote({
   closeModalNote,
   handleSubmitNote,
 }) {
+  const { theme } = useContext(ThemeContext);
+
   const handleModalClick = (e) => e.stopPropagation();
   return ReactDOM.createPortal(
     <div
@@ -86,14 +95,16 @@ export function ModalNote({
       }}
     >
       <div
-        className={`popup popup-nota ${isActiveModalNote && "active"}`}
+        className={`popup popup-nota ${theme.darkmode ? "dark" : "light"} ${
+          isActiveModalNote && "active"
+        }`}
         id="popup"
         onClick={handleModalClick}
       >
         <div className="cont-pop-product">
           <div className="close-window-nota">
             <i
-              className="bx bxs-message-square-x"
+              className="bx bx-x"
               onClick={() => {
                 closeModalNote();
                 handleSubmitNote();
@@ -113,7 +124,10 @@ export function ModalEditProduct({
   isActiveModalEditProduct,
   closeModalEditProduct,
   resetWarningsEditProduct,
+  resetInputEditProduct,
 }) {
+  const { theme } = useContext(ThemeContext);
+
   const handleModalClick = (e) => e.stopPropagation();
   return ReactDOM.createPortal(
     <div
@@ -124,20 +138,24 @@ export function ModalEditProduct({
       onClick={() => {
         closeModalEditProduct();
         resetWarningsEditProduct();
+        resetInputEditProduct();
       }}
     >
       <div
-        className={`popup popup-nota ${isActiveModalEditProduct && "active"}`}
+        className={`popup popup-nota ${theme.darkmode ? "dark" : "light"} ${
+          isActiveModalEditProduct && "active"
+        }`}
         id="popup"
         onClick={handleModalClick}
       >
         <div className="cont-pop-edit-product">
           <div className="close-window-product-edit">
             <i
-              className="bx bxs-message-square-x"
+              className="bx bx-x"
               onClick={() => {
                 closeModalEditProduct();
                 resetWarningsEditProduct();
+                resetInputEditProduct();
               }}
             ></i>
           </div>

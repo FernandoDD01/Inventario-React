@@ -6,7 +6,29 @@
 }
 
 .add-category {
-  margin: 10px 10px 10px 10px;
+  padding: 10px;
+  border-top-right-radius: 40px;
+  border-top-left-radius: 40px;
+  margin: 0px 10px 0px 10px;
+  border-left: solid black;
+  border-right: solid black;
+  border-top: solid black;
+  z-index: 1;
+  background-color: var(--color-content-light);
+}
+
+.add-category.dark {
+  background-color: var(--color-content-dark);
+}
+
+.conjunto-add-category {
+  cursor: pointer;
+  padding: 0px 10px 0px 10px;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  border-radius: 100px;
+  box-shadow: 5px 5px 10px black;
 }
 
 .shop-mode {
@@ -17,16 +39,17 @@
   margin: 10px 10px 10px 10px;
 
   border-radius: 100px;
-  box-shadow: 5px 5px 20px black;
+  box-shadow: 5px 5px 10px black;
 }
 
 .dark-mode {
   display: flex;
   margin: 10px;
   width: 70px;
+  cursor: pointer;
 
   border-radius: 100px;
-  box-shadow: 5px 5px 20px black;
+  box-shadow: 5px 5px 10px black;
 }
 
 .dark-mode.active i {
@@ -44,11 +67,5 @@
 .tools i {
   cursor: pointer;
   border-radius: 100px;
-  box-shadow: 5px 5px 20px black;
-}
-
-.add-category i {
-  cursor: pointer;
-  border-radius: 100px;
-  box-shadow: 5px 5px 20px black;
+  box-shadow: 5px 5px 10px black;
 }

@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import Products from "./Products";
 import { FoldersContext } from "../context/foldersContext";
+import { ThemeContext } from "../context/themeContext";
+
 import { ModalAddProduct } from "./ModalProducts";
 import useModal from "../hooks/useModal";
 import { ModalEditCategory } from "./ModalsCategories";
@@ -13,6 +15,8 @@ export default function Category({
   view,
   openModalDeleteCategory,
 }) {
+  const { theme } = useContext(ThemeContext);
+
   const { folders, addProduct, editCategory } = useContext(FoldersContext);
 
   const [isActiveModalAddProduct, openModalAddProduct, closeModalAddProduct] =
@@ -29,6 +33,7 @@ export default function Category({
   const [inputNewProduct, setInputNewProduct] = useState({
     Nombre: "",
     Cantidad: 1,
+    Unidad: "Pza",
     Precio: 0,
     Enlace: "",
     Nota: "",
@@ -42,6 +47,9 @@ export default function Category({
     withSpaces: false,
     cero: false,
     negative: false,
+    negativePrice: false,
+    voidQuantity: false,
+    voidPrice: false,
   });
 
   const [warningEditCategory, setWarningEditCategory] = useState({
@@ -51,6 +59,31 @@ export default function Category({
     cero: false,
     negative: false,
   });
+
+  const modifyColor = () => {
+    if (theme.darkmode) {
+      let new_color = color;
+
+      let rgb = new_color.toString();
+
+      let valores = rgb
+        .substring(rgb.indexOf("(") + 1, rgb.lastIndexOf(")"))
+        .split(",");
+
+      // Obtener los valores de rojo, verde y azul
+      let rojo = parseInt(valores[0]);
+      let verde = parseInt(valores[1]);
+      let azul = parseInt(valores[2]);
+      let opacidad = "0.6";
+
+      // Construir el nuevo color RGBA
+      let nuevoColor =
+        "rgba(" + rojo + ", " + verde + ", " + azul + ", " + opacidad + ")";
+      return nuevoColor;
+    } else {
+      return color;
+    }
+  };
 
   const handleChange = (e) => {
     setInputNewProduct({
@@ -92,6 +125,26 @@ export default function Category({
       return;
     }
 
+    if (inputNewProduct.Cantidad === "") {
+      setWarningAddProduct({ ...warningAddProduct, voidQuantity: true });
+      return;
+    }
+
+    if (inputNewProduct.Precio === "") {
+      setWarningAddProduct({ ...warningAddProduct, voidPrice: true });
+      return;
+    }
+
+    if (parseFloat(inputNewProduct.Precio) < 0) {
+      setWarningAddProduct({ ...warningAddProduct, negativePrice: true });
+      return;
+    }
+
+    if (parseFloat(inputNewProduct.Cantidad) < 1) {
+      setWarningAddProduct({ ...warningAddProduct, negative: true });
+      return;
+    }
+
     const foundCategory = folders
       .find((folder) => {
         return folder.Nombre === view;
@@ -121,6 +174,7 @@ export default function Category({
     console.log(foundCategory);
 
     addProduct(inputNewProduct, categoryName, view);
+    resetWarnings();
   };
 
   const handleSubmitEditCategory = (e) => {
@@ -160,7 +214,7 @@ export default function Category({
   const resetWarnings = () => {
     setInputNewProduct({
       Nombre: "",
-      Cantidad: 0,
+      Cantidad: 1,
       Precio: 0,
       Enlace: "",
       Nota: "",
@@ -169,6 +223,11 @@ export default function Category({
       void: false,
       duplicate: false,
       withSpaces: false,
+      cero: false,
+      negative: false,
+      negativePrice: false,
+      voidQuantity: false,
+      voidPrice: false,
     });
   };
 
@@ -187,7 +246,7 @@ export default function Category({
         <div
           className={`etiqueta-category ${dropdown ? "active" : "close"}`}
           style={{
-            backgroundColor: `${color}`,
+            backgroundColor: `${modifyColor()}`,
             borderBottomLeftRadius: `${
               dropdown && products.length !== 0 ? "0px" : "20px"
             }`,
@@ -205,9 +264,8 @@ export default function Category({
               } bx-md desplegar`}
               onClick={modifyDropdown}
             ></i>
-
-            <i className="bx bx-square bx-md marcar"></i>
-            <i className="bx bx-sort-a-z bx-md ordenar"></i>
+            {/* <i className="bx bx-square bx-md marcar"></i>
+            <i className="bx bx-sort-a-z bx-md ordenar"></i>*/}
           </div>
           <div className="nombre-categoria">
             <label className="etiqueta-nombre">{categoryName}</label>
@@ -291,16 +349,24 @@ export default function Category({
             onChange={handleChange}
             value={inputNewProduct.Nombre}
           />
+          {warningAddProduct.negative === true && (
+            <p
+              className="adver-product"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              La cantidad no puede ser menor que 1
+            </p>
+          )}
 
+          {warningAddProduct.voidQuantity === true && (
+            <p
+              className="adver-product"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              La cantidad es un campo obligatorio
+            </p>
+          )}
           <div className="cuantificador">
-            {warningAddProduct.negative === true && (
-              <p
-                className="adver-product"
-                style={{ display: "block", fontSize: "12px", color: "red" }}
-              >
-                La cantidad no puede ser menor que 1
-              </p>
-            )}
             <input
               type="number"
               className="input-new-cantidad"
@@ -308,22 +374,37 @@ export default function Category({
               name="Cantidad"
               onChange={handleChange}
               value={inputNewProduct.Cantidad}
-              min={1}
             />
 
-            <select name="" id="">
+            <select
+              name="Unidad"
+              id=""
+              onChange={handleChange}
+              value={inputNewProduct.Unidad}
+            >
               <option value="Pza">Pza</option>
               <option value="Kg">Kg</option>
               <option value="Lt">Lt</option>
               <option value="Paq">Paq</option>
             </select>
           </div>
-          <p
-            className="adver-nombre"
-            style={{ display: "none", fontSize: "12px", Color: "red" }}
-          >
-            El precio es un campo obligatorio
-          </p>
+          {warningAddProduct.negativePrice === true && (
+            <p
+              className="adver-product"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              El precio no puede ser menor que
+            </p>
+          )}
+
+          {warningAddProduct.voidPrice === true && (
+            <p
+              className="adver-product"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              El precio es un campo obligatorio
+            </p>
+          )}
           <input
             type="number"
             className="input-new-precio"
@@ -331,7 +412,6 @@ export default function Category({
             name="Precio"
             onChange={handleChange}
             value={inputNewProduct.Precio}
-            min={0}
           />
           <input
             type="text"

@@ -1,10 +1,12 @@
 .folders {
-  margin-left: 20px;
-  margin-right: 20px;
+  position: relative;
+  margin-left: 40px;
+  margin-right: 40px;
   display: flex;
   flex-flow: row wrap;
-  border-bottom: solid black;
-  z-index: 1;
+
+  z-index: 3;
+  bottom: -5;
 }
 
 .folder {
@@ -15,12 +17,30 @@
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   transform: translateY(3px);
-  background-color: #e2e2e2;
-  z-index: 2;
+
+  z-index: 1;
 
   display: flex;
   cursor: pointer;
 }
+
+.folder.visible {
+  position: relative;
+  transition: all 0.3s;
+  transform: scaleY(1.1);
+  transform-origin: top;
+}
+
+.folder.light.visible {
+  border-bottom: solid var(--color-content-light);
+  background-color: var(--color-content-light);
+}
+
+.folder.dark.visible {
+  border-bottom: solid var(--color-content-dark);
+  background-color: var(--color-content-dark);
+}
+
 .delete-folder {
   margin-left: 8px;
 }

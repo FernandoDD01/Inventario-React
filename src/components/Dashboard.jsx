@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { FoldersContext } from "../context/foldersContext";
 import { ViewContext } from "../context/viewContext";
+import { ThemeContext } from "../context/themeContext";
 
 import Category from "./Category";
 import { ModalAddCategory, ModalDeleteCategory } from "./ModalsCategories";
@@ -11,7 +12,7 @@ export default function Dashboard() {
   const { folders, addFolder, deleteFolder, addCategory, deleteCategory } =
     useContext(FoldersContext); //En los folders se encuentra la data principal
   const { view } = useContext(ViewContext); //en la vista esta el folder en el que nos encontramos actualmente
-
+  const { theme } = useContext(ThemeContext);
   const [inputNewCategory, setInputNewCategory] = useState({ Nombre: "" });
   const [selectDeleteCategory, setSelectDeleteCategory] = useState("");
   const [
@@ -31,6 +32,8 @@ export default function Dashboard() {
     duplicate: false,
     withSpaces: false,
   });
+
+  console.log(folders);
 
   const filterCategories = (folders) => {
     if (folders == undefined) {
@@ -106,41 +109,87 @@ export default function Dashboard() {
     setSelectDeleteCategory(nombre);
   };
 
+  const getTotal = () => {
+    let total = 0;
+
+    console.log(filteredCategories.Categorias);
+
+    if (filteredCategories.Categorias.length === 0) {
+      return 0;
+    } else {
+      filteredCategories.Categorias.forEach((categoria) => {
+        if (Object.values(categoria)[0].Productos.length === 0) {
+          total += 0;
+        } else {
+          Object.values(categoria)[0].Productos.forEach((producto) => {
+            total +=
+              parseFloat(producto.Cantidad) * parseFloat(producto.Precio);
+          });
+        }
+      });
+    }
+
+    return total;
+  };
+
   return (
     <>
       {view === "Bienvenida" ? (
         <h3>Bienvenid@</h3>
       ) : (
         <>
-          <div className="add-category" title="Agregar categoría">
-            <i className="bx bx-plus bx-lg" onClick={openModalAddCategory}></i>
+          <div
+            className={`add-category ${theme.darkmode ? "dark" : "light"}`}
+            title="Agregar categoría"
+          >
+            <div
+              className="conjunto-add-category"
+              onClick={openModalAddCategory}
+            >
+              <i className="bx bx-plus bx-md"></i> <div>Agregar Categoría</div>
+            </div>
           </div>
 
           {/* <div>{filteredCategories.Nombre}</div>*/}
 
           {console.log(filteredCategories.Categorias)}
-
-          {Object.keys(filteredCategories.Categorias).length === 0 ? (
-            <div className="content">
-              <div className="sub-content">
+          <div className={`content ${theme.darkmode ? "dark" : "light"}`}>
+            <div className="sub-content">
+              {Object.keys(filteredCategories.Categorias).length === 0 ? (
                 <div className="empty-category">Sin registros 😢</div>
+              ) : (
+                filteredCategories.Categorias.map((categoria, index) => {
+                  return (
+                    <Category
+                      key={index}
+                      categoryName={Object.keys(categoria)[0]}
+                      color={categoria[Object.keys(categoria)[0]].Color}
+                      products={categoria[Object.keys(categoria)[0]].Productos}
+                      handleSelectDeleteCategory={handleSelectDeleteCategory}
+                      view={view}
+                      openModalDeleteCategory={openModalDeleteCategory}
+                    ></Category>
+                  );
+                })
+              )}
+            </div>
+          </div>
+
+          <div className={`total-content ${theme.darkmode ? "dark" : "light"}`}>
+            <div
+              className={`total-sub-content ${
+                theme.darkmode ? "dark" : "light"
+              }`}
+            >
+              <div className="total">
+                TOTAL:{" "}
+                {getTotal().toLocaleString("es-MX", {
+                  style: "currency",
+                  currency: "MXN",
+                })}
               </div>
             </div>
-          ) : (
-            filteredCategories.Categorias.map((categoria, index) => {
-              return (
-                <Category
-                  key={index}
-                  categoryName={Object.keys(categoria)[0]}
-                  color={categoria[Object.keys(categoria)[0]].Color}
-                  products={categoria[Object.keys(categoria)[0]].Productos}
-                  handleSelectDeleteCategory={handleSelectDeleteCategory}
-                  view={view}
-                  openModalDeleteCategory={openModalDeleteCategory}
-                ></Category>
-              );
-            })
-          )}
+          </div>
         </>
       )}
       <ModalAddCategory

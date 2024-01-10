@@ -24,7 +24,7 @@ export function folderReducer(state, action) {
           ...state.folders,
           {
             Nombre: `${action.payload}`,
-            Categorias: {},
+            Categorias: [],
             id: idLastElement + 1,
           },
         ],
@@ -259,7 +259,36 @@ export function folderReducer(state, action) {
         action.payload.View
       );
 
-      return state;
+      let clone = structuredClone(state.folders);
+
+      clone.map((folder) => {
+        console.log(folder);
+        return folder.Nombre === action.payload.View
+          ? folder.Categorias.map((categoria) => {
+              console.log(folder.Categorias);
+              return Object.keys(categoria)[0] === action.payload.Category
+                ? Object.values(categoria)[0].Productos.map((producto) => {
+                    console.log(producto);
+                    return producto.Nombre === action.payload.Product
+                      ? ((producto.Nombre = action.payload.New_Product.Nombre),
+                        (producto.Cantidad =
+                          action.payload.New_Product.Cantidad),
+                        (producto.Unidad = action.payload.New_Product.Unidad),
+                        (producto.Precio = action.payload.New_Product.Precio),
+                        (producto.Enlace = action.payload.New_Product.Enlace),
+                        (producto.Nota = action.payload.New_Product.Nota))
+                      : producto;
+                  })
+                : categoria;
+            })
+          : folder;
+      });
+
+      console.log("Así quedó clone", clone);
+
+      return {
+        folders: clone,
+      };
     }
 
     case TYPES.EDIT_NOTE: {

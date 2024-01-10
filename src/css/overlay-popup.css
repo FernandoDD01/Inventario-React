@@ -29,6 +29,29 @@
   opacity: 0;
 }
 
+.popup.dark {
+  background: rgb(32, 32, 36);
+  color: white;
+}
+
+.popup.dark input {
+  color: white;
+  border: 2px solid white;
+}
+
+.popup.dark textarea {
+  color: white;
+  border: 2px solid white;
+  background-color: rgb(32, 32, 36);
+  border-radius: 10px;
+}
+
+.popup.dark select {
+  color: white;
+  background-color: rgb(32, 32, 36);
+  border: 2px solid white;
+}
+
 .popup .btn-cerrar-popup {
   font-size: 20px;
   line-height: 20px;

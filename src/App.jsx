@@ -21,23 +21,26 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import { FoldersProvider } from "./context/foldersContext";
 import { ViewProvider } from "./context/viewContext";
+import { ThemeProvider } from "./context/themeContext";
 
 function App() {
   return (
     <>
-      <ViewProvider>
-        <FoldersProvider>
-          <Header />
+      <ThemeProvider>
+        <ViewProvider>
+          <FoldersProvider>
+            <Header />
 
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Main />}></Route>
-            </Routes>
-          </BrowserRouter>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Main />}></Route>
+              </Routes>
+            </BrowserRouter>
 
-          <Footer />
-        </FoldersProvider>
-      </ViewProvider>
+            <Footer />
+          </FoldersProvider>
+        </ViewProvider>
+      </ThemeProvider>
     </>
   );
 }

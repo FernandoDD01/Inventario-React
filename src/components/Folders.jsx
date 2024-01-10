@@ -112,7 +112,11 @@ export default function Folders() {
   return (
     <>
       <div className="folders">
-        <li onClick={changeView}>Bienvenida</li>
+        <div className="folder folder-primario">
+          <div className="nom-folder" onClick={changeView}>
+            Bienvenida
+          </div>
+        </div>
 
         {folders !== undefined &&
           folders.map((folder) => {

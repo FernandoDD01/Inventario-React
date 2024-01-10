@@ -9,7 +9,7 @@ import { ViewContext } from "../context/viewContext";
 import { FoldersContext } from "../context/foldersContext";
 
 export default function Product({ categoryName, product }) {
-  let { Nombre, Cantidad, Precio, Enlace, Nota } = product;
+  let { Nombre, Cantidad, Unidad, Precio, Enlace, Nota } = product;
   const { view } = useContext(ViewContext);
   const { folders, deleteProduct, editProduct, editNote } =
     useContext(FoldersContext);
@@ -27,6 +27,8 @@ export default function Product({ categoryName, product }) {
     closeModalEditProduct,
   ] = useModal(false);
   const [note, setNote] = useState(Nota);
+
+  console.log(Nota);
   const [inputEditProduct, setInputEditProduct] = useState(product);
 
   const [warningEditProduct, setWarningEditProduct] = useState({
@@ -35,6 +37,9 @@ export default function Product({ categoryName, product }) {
     withSpaces: false,
     cero: false,
     negative: false,
+    negativePrice: false,
+    voidQuantity: false,
+    voidPrice: false,
   });
 
   const handleChangeNote = (e) => {
@@ -60,6 +65,25 @@ export default function Product({ categoryName, product }) {
   const handleSubmitEditProduct = (e) => {
     e.preventDefault();
 
+    if (parseFloat(inputEditProduct.Precio) < 0) {
+      setWarningEditProduct({ ...warningEditProduct, negativePrice: true });
+      return;
+    }
+
+    if (parseFloat(inputEditProduct.Cantidad) < 1) {
+      setWarningEditProduct({ ...warningEditProduct, negative: true });
+      return;
+    }
+
+    if (inputEditProduct.Cantidad === "") {
+      setWarningEditProduct({ ...warningEditProduct, voidQuantity: true });
+      return;
+    }
+    if (inputEditProduct.Precio === "") {
+      setWarningEditProduct({ ...warningEditProduct, voidPrice: true });
+      return;
+    }
+
     if (inputEditProduct.Nombre === "") {
       setWarningEditProduct({ ...warningEditProduct, void: true });
       return;
@@ -77,12 +101,20 @@ export default function Product({ categoryName, product }) {
   };
 
   const resetWarningsEditProduct = () => {
-    setInputEditProduct(product);
     setWarningEditProduct({
       void: false,
       duplicate: false,
       withSpaces: false,
+      cero: false,
+      negative: false,
+      negativePrice: false,
+      voidQuantity: false,
+      voidPrice: false,
     });
+  };
+
+  const resetInputEditProduct = () => {
+    setInputEditProduct(product);
   };
 
   return (
@@ -103,11 +135,16 @@ export default function Product({ categoryName, product }) {
         <div className="nom-product">{Nombre}</div>
         <div className="cuantificador-content">
           <div className="cant-product">{Cantidad}</div>
-          <div className="space-cuant"></div>
+          <div className="space-cuant">{Unidad}</div>
         </div>
 
         <div className="insertPeso">
-          $<div className="precio-product">{Precio}</div>
+          <div className="precio-product">
+            {Precio.toLocaleString("es-MX", {
+              style: "currency",
+              currency: "MXN",
+            })}
+          </div>
         </div>
 
         <div className="enlace-product">
@@ -172,6 +209,7 @@ export default function Product({ categoryName, product }) {
         isActiveModalEditProduct={isActiveModalEditProduct}
         closeModalEditProduct={closeModalEditProduct}
         resetWarningsEditProduct={resetWarningsEditProduct}
+        resetInputEditProduct={resetInputEditProduct}
       >
         <div>
           <h2>Editar Producto</h2>
@@ -203,15 +241,24 @@ export default function Product({ categoryName, product }) {
             value={inputEditProduct.Nombre}
             onChange={handleChangeEditProduct}
           />
+          {warningEditProduct.negative === true && (
+            <p
+              className="adver-product"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              La cantidad no puede ser menor que 1
+            </p>
+          )}
+
+          {warningEditProduct.voidQuantity === true && (
+            <p
+              className="adver-product"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              La cantidad es un campo obligatorio
+            </p>
+          )}
           <div className="cuantificador-edit">
-            {warningEditProduct.negative === true && (
-              <p
-                className="adver-product"
-                style={{ display: "block", fontSize: "12px", color: "red" }}
-              >
-                La cantidad no puede ser menor que 1
-              </p>
-            )}
             <input
               type="number"
               className="input-new-cantidad-edit"
@@ -219,16 +266,39 @@ export default function Product({ categoryName, product }) {
               name="Cantidad"
               value={inputEditProduct.Cantidad}
               onChange={handleChangeEditProduct}
-              min={1}
             />
 
-            <select name="" id="" className="select-cantidad-edit">
+            <select
+              name="Unidad"
+              id=""
+              className="select-cantidad-edit"
+              value={inputEditProduct.Unidad}
+              onChange={handleChangeEditProduct}
+            >
               <option value="Pza">Pza</option>
               <option value="Kg">Kg</option>
               <option value="Lt">Lt</option>
               <option value="Paq">Paq</option>
             </select>
           </div>
+
+          {warningEditProduct.negativePrice === true && (
+            <p
+              className="adver-product"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              El precio no puede ser menor que 0
+            </p>
+          )}
+
+          {warningEditProduct.voidPrice === true && (
+            <p
+              className="adver-product"
+              style={{ display: "block", fontSize: "12px", color: "red" }}
+            >
+              El precio es un campo obligatorio
+            </p>
+          )}
 
           <input
             type="number"
@@ -237,7 +307,6 @@ export default function Product({ categoryName, product }) {
             name="Precio"
             value={inputEditProduct.Precio}
             onChange={handleChangeEditProduct}
-            min={0}
           />
           <input
             type="text"
@@ -255,7 +324,10 @@ export default function Product({ categoryName, product }) {
             placeholder="Nota..."
             name="Nota"
             value={inputEditProduct.Nota}
-            onChange={handleChangeEditProduct}
+            onChange={(e) => {
+              handleChangeEditProduct(e);
+              handleChangeNote(e);
+            }}
           ></textarea>
 
           <button className="btn-edit-product" type="submit">
