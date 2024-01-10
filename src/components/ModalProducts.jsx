@@ -107,3 +107,45 @@ export function ModalNote({
     document.getElementById("modal")
   );
 }
+
+export function ModalEditProduct({
+  children,
+  isActiveModalEditProduct,
+  closeModalEditProduct,
+  resetWarningsEditProduct,
+}) {
+  const handleModalClick = (e) => e.stopPropagation();
+  return ReactDOM.createPortal(
+    <div
+      className={`overlay overlay-edit-product ${
+        isActiveModalEditProduct && "active"
+      }`}
+      id="overlay"
+      onClick={() => {
+        closeModalEditProduct();
+        resetWarningsEditProduct();
+      }}
+    >
+      <div
+        className={`popup popup-nota ${isActiveModalEditProduct && "active"}`}
+        id="popup"
+        onClick={handleModalClick}
+      >
+        <div className="cont-pop-edit-product">
+          <div className="close-window-product-edit">
+            <i
+              className="bx bxs-message-square-x"
+              onClick={() => {
+                closeModalEditProduct();
+                resetWarningsEditProduct();
+              }}
+            ></i>
+          </div>
+          {children}
+        </div>
+      </div>
+    </div>,
+
+    document.getElementById("modal")
+  );
+}

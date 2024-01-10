@@ -245,6 +245,23 @@ export function folderReducer(state, action) {
       };
     }
 
+    case TYPES.EDIT_PRODUCT: {
+      console.log(
+        "El nuevo producto es:",
+        action.payload.New_Product,
+        "del producto antiguo es",
+        action.payload.Product,
+
+        "de la categoria",
+        action.payload.Category,
+
+        "de la vista",
+        action.payload.View
+      );
+
+      return state;
+    }
+
     case TYPES.EDIT_NOTE: {
       console.log(
         "La nueva nota es:",

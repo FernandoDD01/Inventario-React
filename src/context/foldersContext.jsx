@@ -59,6 +59,18 @@ export const FoldersProvider = ({ children }) => {
     });
   };
 
+  const editProduct = (product, new_product, category, view) => {
+    dispatch({
+      type: TYPES.EDIT_PRODUCT,
+      payload: {
+        Product: product,
+        New_Product: new_product,
+        Category: category,
+        View: view,
+      },
+    });
+  };
+
   const editNote = (note, product, category, view) => {
     dispatch({
       type: TYPES.EDIT_NOTE,
@@ -76,8 +88,8 @@ export const FoldersProvider = ({ children }) => {
         deleteCategory,
         addProduct,
         deleteProduct,
+        editProduct,
         editCategory,
-
         editNote,
       }}
     >
