@@ -1,5 +1,5 @@
 :root {
-  --color-header: #98ace0ff;
+  --color-header: rgb(91, 114, 173);
   --color-header-dark: rgb(26, 1, 42);
   --color-footer-dark: rgb(29, 1, 48);
 
@@ -27,15 +27,52 @@ body {
   margin: 0;
   padding: 0;
   background-color: #c7c5c5;
+}
+
+#root {
   display: flex;
-  flex-flow: column;
+  flex-direction: row;
+}
+
+.collapsed {
+  margin-left: -260px;
+}
+
+.aside {
+  top: 0;
+  height: 100vh;
+  position: sticky;
+  min-width: 260px;
+  max-width: 260px;
+
+  background-color: var(--color-header);
+  transition: margin-left 0.35s ease-in-out, left 0.35s ease-in-out,
+    margin-right 0.35s ease-in-out, right 0.35s ease-in-out;
+}
+
+.aside.dark {
+  background-color: rgb(53, 68, 105);
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
+  top: 0;
+  z-index: 999;
+  height: 60px;
+  position: sticky;
+  width: 100%;
+  background-color: #fff;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 2px 2px 5px black;
 }
 
 header.dark {
@@ -44,6 +81,7 @@ header.dark {
 }
 
 main {
+  padding-top: 20px;
   flex-grow: 1;
 
   display: flex;
@@ -56,13 +94,55 @@ main.dark {
 }
 
 footer {
+  height: 100px;
   font-size: 14px;
   background-color: antiquewhite;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   box-shadow: 5px 5px 20px black;
+}
+
+.navbar {
+  color: rgb(233, 236, 239, 0.5);
+
+  font-weight: bolder;
+}
+
+.navbar .title-nav {
+  padding-left: 20px;
+  color: rgba(219, 222, 226, 0.9);
+
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.nav-item {
+  margin-bottom: 20px;
+}
+
+.contact-item {
+  margin: 10px;
+}
+
+.menu-item {
+  cursor: pointer;
+  padding: 10px;
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-item i {
+  margin-right: 7px;
+}
+
+.menu-item:hover {
+  transition: all 0.2s ease;
+  border-left: solid 5px black;
+  color: rgb(233, 236, 239, 1);
+  background-color: rgb(126, 141, 180);
 }
 
 footer.dark {
@@ -87,7 +167,7 @@ footer.dark i:hover {
 }
 
 footer div {
-  margin: 10px;
+  margin: 5px;
 }
 
 .contact-icons {
@@ -111,7 +191,14 @@ footer div {
 }
 
 .contact {
-  margin: 0;
+  margin-top: 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contact .title-nav {
+  padding: 0;
 }
 
 .content {
@@ -138,13 +225,14 @@ footer div {
 }
 
 .content-title {
+  margin-top: 30px;
+  margin-bottom: 30px;
+
   width: 100%;
   padding: 10px;
-  background-color: var(--color-header);
+
   font-family: Poppins, sans-serif;
   font-style: italic;
-
-  box-shadow: 5px 5px 20px black;
 
   display: flex;
   justify-content: center;
@@ -157,8 +245,8 @@ footer div {
 }
 
 .content-title img {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 }
 
 .image {
@@ -172,11 +260,11 @@ footer div {
 }
 
 .title {
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: white;
   margin-left: 10px;
-  height: 100%;
-
-  flex-grow: 1;
-  align-self: start;
 }
 
 /* Diseño de categorias*/

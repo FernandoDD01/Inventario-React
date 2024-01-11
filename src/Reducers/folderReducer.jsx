@@ -2,6 +2,7 @@ import { TYPES } from "../actions/folderActions";
 import { doc, setDoc, deleteDoc } from "firebase/firestore";
 
 import { db } from "../firebase/firebase";
+import { CHANGES } from "../actions/darkmodeActions";
 
 export function folderReducer(state, action) {
   console.log(state);
@@ -430,6 +431,15 @@ export function folderReducer(state, action) {
       return {
         folders: clone,
       };
+    }
+
+    case CHANGES.CHANGE_MODE: {
+      console.log("se cambio el tema");
+      console.log(action.payload);
+      const folderRef = doc(db, "Darkmode", "mode");
+      setDoc(folderRef, { darkmode: action.payload });
+
+      return state;
     }
 
     default:

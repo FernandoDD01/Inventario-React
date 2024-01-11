@@ -22,6 +22,12 @@ export const db = getFirestore(app);
 import { collection, getDocs } from "firebase/firestore";
 
 export const folders = [];
+export let mode = {};
+
+const querySnapshotMode = await getDocs(collection(db, "Darkmode"));
+querySnapshotMode.forEach((doc) => {
+  mode = doc.data();
+});
 
 const querySnapshot = await getDocs(collection(db, "Folders"));
 querySnapshot.forEach((doc) => {

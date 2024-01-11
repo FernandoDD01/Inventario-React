@@ -26,7 +26,7 @@
 
 .folder.visible {
   position: relative;
-  transition: all 0.3s;
+  transition: transform 0.3s;
   transform: scaleY(1.1);
   transform-origin: top;
 }

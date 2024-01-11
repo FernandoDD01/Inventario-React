@@ -1,8 +1,14 @@
 .tools {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  min-width: auto;
+}
+
+.tools .collapser {
+  color: var(--color-header);
+  margin: 10px 20px 10px 20px;
 }
 
 .add-category {
@@ -43,8 +49,8 @@
 }
 
 .dark-mode {
+  margin: 10px 30px 10px 30px;
   display: flex;
-  margin: 10px;
   width: 70px;
   cursor: pointer;
 
@@ -66,6 +72,9 @@
 
 .tools i {
   cursor: pointer;
+}
+
+.tools .dark-mode i {
   border-radius: 100px;
-  box-shadow: 5px 5px 10px black;
+  box-shadow: 1px 1px 5px black;
 }
