@@ -1,5 +1,7 @@
 import { createContext, useReducer } from "react";
-import { folders } from "../mookData.json/data.json";
+import { folders } from "../firebase/firebase";
+
+//import { folders } from "../mookData.json/data.json";
 import { folderReducer } from "../Reducers/folderReducer";
 import { TYPES } from "../actions/folderActions";
 import toastify from "toastify-js";
@@ -11,7 +13,7 @@ export const FoldersContext = createContext(foldersInitialState);
 export const FoldersProvider = ({ children }) => {
   const [state, dispatch] = useReducer(folderReducer, foldersInitialState);
 
-  const addFolder = (input) => {
+  const addFolder = async (input) => {
     console.log("Se añadio la tarea", input.Nombre);
     dispatch({ type: TYPES.ADD_FOLDER, payload: `${input.Nombre}` });
     toastify({

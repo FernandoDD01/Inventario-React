@@ -1,5 +1,7 @@
 import { TYPES } from "../actions/folderActions";
-import Product from "../components/Product";
+import { doc, setDoc, deleteDoc } from "firebase/firestore";
+
+import { db } from "../firebase/firebase";
 
 export function folderReducer(state, action) {
   console.log(state);
@@ -19,6 +21,13 @@ export function folderReducer(state, action) {
         idLastElement = state.folders[state.folders.length - 1].id;
       }
 
+      // Add a new document in collection "cities"
+      setDoc(doc(db, "Folders", `${action.payload}`), {
+        id: idLastElement + 1,
+        Nombre: `${action.payload}`,
+        Categorias: [],
+      });
+
       return {
         folders: [
           ...state.folders,
@@ -34,7 +43,7 @@ export function folderReducer(state, action) {
     case TYPES.DELETE_FOLDER: {
       console.log("Se borro el folder", action.payload);
 
-      //Posibilidad de que se re acomoden los id
+      deleteDoc(doc(db, "Folders", `${action.payload}`));
 
       return {
         folders: state.folders.filter((folder) => {
@@ -80,6 +89,28 @@ export function folderReducer(state, action) {
         action.payload.View
       );
 
+      let categorias = [];
+
+      state.folders
+        .find((folder) => {
+          return folder.Nombre === action.payload.View;
+        })
+        .Categorias.forEach((categoria) => {
+          categorias.push(categoria);
+        });
+
+      const COLOR = randomColor();
+
+      categorias.push({
+        [`${action.payload.Nombre}`]: {
+          Color: COLOR,
+          Productos: [],
+        },
+      });
+
+      const folderRef = doc(db, "Folders", action.payload.View);
+      setDoc(folderRef, { Categorias: categorias }, { merge: true });
+
       return {
         folders: state.folders.map((folder) => {
           return folder.Nombre === action.payload.View
@@ -89,7 +120,7 @@ export function folderReducer(state, action) {
                   ...folder.Categorias,
                   {
                     [`${action.payload.Nombre}`]: {
-                      Color: randomColor(),
+                      Color: COLOR,
                       Productos: [],
                     },
                   },
@@ -106,15 +137,21 @@ export function folderReducer(state, action) {
       console.log(state.folders);
       console.log(action.payload.Nombre);
 
-      console.log(
-        state.folders
-          .find((folder) => {
-            return folder.Nombre === action.payload.View;
-          })
-          .Categorias.filter((categoria) => {
-            return Object.keys(categoria)[0] !== action.payload.Nombre;
-          })
-      );
+      let categorias = [];
+
+      state.folders
+        .find((folder) => {
+          return folder.Nombre === action.payload.View;
+        })
+        .Categorias.filter((categoria) => {
+          return Object.keys(categoria)[0] !== action.payload.Nombre;
+        })
+        .forEach((categoria) => {
+          categorias.push(categoria);
+        });
+
+      const folderRef = doc(db, "Folders", action.payload.View);
+      setDoc(folderRef, { Categorias: categorias }, { merge: true });
 
       return {
         folders: state.folders.map((folder) => {
@@ -164,6 +201,19 @@ export function folderReducer(state, action) {
           : folder;
       });
 
+      let categorias = [];
+
+      clone
+        .find((folder) => {
+          return folder.Nombre === action.payload.View;
+        })
+        .Categorias.forEach((categoria) => {
+          categorias.push(categoria);
+        });
+
+      const folderRef = doc(db, "Folders", action.payload.View);
+      setDoc(folderRef, { Categorias: categorias }, { merge: true });
+
       console.log("Así quedo el nombre editado", clone);
 
       return {
@@ -196,6 +246,19 @@ export function folderReducer(state, action) {
             })
           : folder;
       });
+
+      let categorias = [];
+
+      clone
+        .find((folder) => {
+          return folder.Nombre === action.payload.View;
+        })
+        .Categorias.forEach((categoria) => {
+          categorias.push(categoria);
+        });
+
+      const folderRef = doc(db, "Folders", action.payload.View);
+      setDoc(folderRef, { Categorias: categorias }, { merge: true });
 
       return {
         folders: clone,
@@ -237,6 +300,19 @@ export function folderReducer(state, action) {
             })
           : folder;
       });
+
+      let categorias = [];
+
+      clone
+        .find((folder) => {
+          return folder.Nombre === action.payload.View;
+        })
+        .Categorias.forEach((categoria) => {
+          categorias.push(categoria);
+        });
+
+      const folderRef = doc(db, "Folders", action.payload.View);
+      setDoc(folderRef, { Categorias: categorias }, { merge: true });
 
       console.log("Así quedó clone", clone);
 
@@ -284,6 +360,19 @@ export function folderReducer(state, action) {
           : folder;
       });
 
+      let categorias = [];
+
+      clone
+        .find((folder) => {
+          return folder.Nombre === action.payload.View;
+        })
+        .Categorias.forEach((categoria) => {
+          categorias.push(categoria);
+        });
+
+      const folderRef = doc(db, "Folders", action.payload.View);
+      setDoc(folderRef, { Categorias: categorias }, { merge: true });
+
       console.log("Así quedó clone", clone);
 
       return {
@@ -324,6 +413,18 @@ export function folderReducer(state, action) {
           : folder;
       });
 
+      let categorias = [];
+
+      clone
+        .find((folder) => {
+          return folder.Nombre === action.payload.View;
+        })
+        .Categorias.forEach((categoria) => {
+          categorias.push(categoria);
+        });
+
+      const folderRef = doc(db, "Folders", action.payload.View);
+      setDoc(folderRef, { Categorias: categorias }, { merge: true });
       console.log("Así quedó clone", clone);
 
       return {
