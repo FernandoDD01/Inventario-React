@@ -140,7 +140,8 @@ export default function Product({ categoryName, product }) {
 
         <div className="insertPeso">
           <div className="precio-product">
-            {Precio.toLocaleString("es-MX", {
+            {console.log(Precio)}
+            {parseFloat(Precio).toLocaleString("es-MX", {
               style: "currency",
               currency: "MXN",
             })}

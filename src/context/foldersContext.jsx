@@ -128,7 +128,7 @@ export const FoldersProvider = ({ children }) => {
     });
 
     toastify({
-      text: `La producto ${product} fue añadido`,
+      text: `La producto ${product.Nombre} fue añadido`,
       duration: 3000,
       destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,

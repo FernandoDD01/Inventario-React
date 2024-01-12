@@ -218,6 +218,7 @@ export default function Category({
       Precio: 0,
       Enlace: "",
       Nota: "",
+      Unidad: "Pza",
     });
     setWarningAddProduct({
       void: false,

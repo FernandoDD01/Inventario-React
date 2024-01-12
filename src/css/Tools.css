@@ -12,7 +12,7 @@
 }
 
 .add-category {
-  padding: 10px;
+  padding: 10px 20px 10px 20px;
   border-top-right-radius: 40px;
   border-top-left-radius: 40px;
   margin: 0px 10px 0px 10px;
@@ -21,6 +21,9 @@
   border-top: solid black;
   z-index: 1;
   background-color: var(--color-content-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .add-category.dark {
@@ -28,6 +31,16 @@
 }
 
 .conjunto-add-category {
+  cursor: pointer;
+  padding: 0px 10px 0px 10px;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  border-radius: 100px;
+  box-shadow: 5px 5px 10px black;
+}
+
+.conjunto-list-mode {
   cursor: pointer;
   padding: 0px 10px 0px 10px;
   width: max-content;

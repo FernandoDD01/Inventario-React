@@ -6,6 +6,7 @@ import { ThemeContext } from "../context/themeContext";
 import Category from "./Category";
 import { ModalAddCategory, ModalDeleteCategory } from "./ModalsCategories";
 import useModal from "../hooks/useModal";
+import { ModalList } from "./ModalList";
 
 export default function Dashboard() {
   //Traemos los contextos de los folders y de la vista
@@ -26,6 +27,8 @@ export default function Dashboard() {
     openModalDeleteCategory,
     closeModalDeleteCategory,
   ] = useModal(false);
+
+  const [isActiveModalList, openModalList, closeModalList] = useModal(false);
 
   const [warningAddCategory, setWarningAddCategory] = useState({
     void: false,
@@ -132,6 +135,37 @@ export default function Dashboard() {
     return total;
   };
 
+  const handleListItem = (e) => {
+    if (e.target.classList.contains("bx-circle")) {
+      e.target.classList.remove("bx-circle");
+      e.target.classList.add("bx-check-circle");
+      e.target.parentNode.parentNode.querySelector(
+        ".nombre-producto-lista"
+      ).style.textDecoration = "line-through";
+      e.target.parentNode.parentNode.querySelector(
+        ".cantidad-producto-lista"
+      ).style.textDecoration = "line-through";
+      e.target.parentNode.parentNode.querySelector(
+        ".precio-producto-lista"
+      ).style.textDecoration = "line-through";
+      e.target.parentNode.parentNode.style.backgroundColor =
+        "rgba(18, 78, 0,0.5)";
+    } else {
+      e.target.classList.add("bx-circle");
+      e.target.classList.remove("bx-check-circle");
+      e.target.parentNode.parentNode.querySelector(
+        ".nombre-producto-lista"
+      ).style.textDecoration = "none";
+      e.target.parentNode.parentNode.querySelector(
+        ".cantidad-producto-lista"
+      ).style.textDecoration = "none";
+      e.target.parentNode.parentNode.querySelector(
+        ".precio-producto-lista"
+      ).style.textDecoration = "none";
+      e.target.parentNode.parentNode.style.backgroundColor = "transparent";
+    }
+  };
+
   return (
     <>
       {view === "Bienvenida" ? (
@@ -148,6 +182,10 @@ export default function Dashboard() {
             >
               <i className="bx bx-plus bx-md"></i> <div>Agregar Categoría</div>
             </div>
+
+            <div className="conjunto-list-mode" onClick={openModalList}>
+              <i className="bx bx-list-check bx-md"></i> <div>Modo lista</div>
+            </div>
           </div>
 
           {/* <div>{filteredCategories.Nombre}</div>*/}
@@ -156,7 +194,7 @@ export default function Dashboard() {
           <div className={`content ${theme.darkmode ? "dark" : "light"}`}>
             <div className="sub-content">
               {Object.keys(filteredCategories.Categorias).length === 0 ? (
-                <div className="empty-category">Sin registros 😢</div>
+                <div className="empty-category">Sin registros</div>
               ) : (
                 filteredCategories.Categorias.map((categoria, index) => {
                   return (
@@ -182,7 +220,7 @@ export default function Dashboard() {
               }`}
             >
               <div className="total">
-                TOTAL:{" "}
+                TOTAL:
                 {getTotal().toLocaleString("es-MX", {
                   style: "currency",
                   currency: "MXN",
@@ -266,6 +304,82 @@ export default function Dashboard() {
           Cancelar
         </div>
       </ModalDeleteCategory>
+      <ModalList isActiveModalList={isActiveModalList}>
+        <div className="close-window-add-folder">
+          <i
+            className="bx bx-x bx-md"
+            onClick={() => {
+              closeModalList();
+            }}
+          ></i>
+        </div>
+        <div>
+          <h2>Lista de compras</h2>
+        </div>
+        <div className="lista-content-lista">
+          {view === "Bienvenida" ? (
+            <div>No tiene productos</div>
+          ) : (
+            <>
+              {filteredCategories.Categorias.map((categoria, index) => {
+                return (
+                  <>
+                    <div key={index} className="categoria-list">
+                      {Object.keys(categoria)[0]}
+                    </div>
+                    {console.log(categoria)}
+                    {Object.values(categoria)[0].Productos.length === 0 ? (
+                      <div>No tiene productos</div>
+                    ) : (
+                      Object.values(categoria)[0].Productos.map(
+                        (producto, index) => {
+                          return (
+                            <div
+                              key={index}
+                              className={`producto-list ${
+                                theme.darkmode ? "dark" : "light"
+                              }`}
+                            >
+                              <div className="btn-tachar">
+                                <i
+                                  className="bx bx-circle bx-sm tachar"
+                                  onClick={handleListItem}
+                                ></i>
+                              </div>
+                              <div className="nombre-producto-lista">
+                                {producto.Nombre}
+                              </div>
+                              <div className="cantidad-producto-lista">
+                                {producto.Cantidad}
+                                {producto.Unidad}
+                              </div>
+                              <div className="precio-producto-lista">
+                                {producto.Precio.toLocaleString("es-MX", {
+                                  style: "currency",
+                                  currency: "MXN",
+                                })}
+                              </div>
+                            </div>
+                          );
+                        }
+                      )
+                    )}
+                  </>
+                );
+              })}
+              <div className="total-list-content">
+                <div className="total-list">
+                  Total:
+                  {getTotal().toLocaleString("es-MX", {
+                    style: "currency",
+                    currency: "MXN",
+                  })}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </ModalList>
     </>
   );
 }

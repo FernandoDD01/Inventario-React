@@ -2,7 +2,6 @@
   --color-header: rgb(91, 114, 173);
   --color-header-dark: rgb(26, 1, 42);
   --color-footer-dark: rgb(29, 1, 48);
-
   --color-content-dark: rgb(52, 52, 56);
   --color-content-light: white;
 }
@@ -191,6 +190,8 @@ footer div {
 }
 
 .contact {
+  position: absolute;
+  bottom: 20px;
   margin-top: 100px;
   text-align: center;
   display: flex;
@@ -325,10 +326,13 @@ footer div {
 }
 
 .empty-category {
-  height: 100px;
+  font-weight: bolder;
+  font-size: 20px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 60px;
 }
 
 .total-content {
