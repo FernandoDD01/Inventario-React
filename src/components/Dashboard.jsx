@@ -169,7 +169,7 @@ export default function Dashboard() {
   return (
     <>
       {view === "Bienvenida" ? (
-        <h3>Bienvenid@</h3>
+        <div className="empty-dashboard">Crea un folder</div>
       ) : (
         <>
           <div

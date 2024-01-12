@@ -23,28 +23,37 @@ import { FoldersProvider } from "./context/foldersContext";
 import { ViewProvider } from "./context/viewContext";
 import { ThemeProvider } from "./context/themeContext";
 import Aside from "./components/Aside";
+import Stadistics from "./components/Stadistics";
+import Guide from "./components/Guide";
+import Settings from "./components/Settings";
+import Error404 from "./components/Error404";
 
 function App() {
   return (
     <>
-      <ThemeProvider>
-        <Aside />
-        <ViewProvider>
-          <FoldersProvider>
-            <div className="main">
-              <Header />
+      <BrowserRouter>
+        <ThemeProvider>
+          <Aside />
+          <ViewProvider>
+            <FoldersProvider>
+              <div className="main">
+                <Header />
 
-              <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<Main />}></Route>
+                  <Route path="/inventario" element={<Main />}></Route>
+                  <Route path="/estadisticas" element={<Stadistics />}></Route>
+                  <Route path="/guia" element={<Guide />}></Route>
+                  <Route path="/ajustes" element={<Settings />}></Route>
+                  <Route path="*" element={<Error404></Error404>}></Route>
                 </Routes>
-              </BrowserRouter>
 
-              <Footer />
-            </div>
-          </FoldersProvider>
-        </ViewProvider>
-      </ThemeProvider>
+                <Footer />
+              </div>
+            </FoldersProvider>
+          </ViewProvider>
+        </ThemeProvider>
+      </BrowserRouter>
     </>
   );
 }

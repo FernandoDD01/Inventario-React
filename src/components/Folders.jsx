@@ -112,11 +112,11 @@ export default function Folders() {
   return (
     <>
       <div className="folders">
-        <div className="folder folder-primario">
+        {/* <div className="folder folder-primario">
           <div className="nom-folder" onClick={changeView}>
             Bienvenida
           </div>
-        </div>
+        </div> */}
 
         {folders !== undefined &&
           folders.map((folder) => {
@@ -131,8 +131,10 @@ export default function Folders() {
               ></Folder>
             );
           })}
-        <div className="add-folder">
-          <i className="bx bx-plus" onClick={openModalAddFolder}></i>
+
+        <div className="add-folder" onClick={openModalAddFolder}>
+          <i className="bx bx-folder-plus bx-sm"></i>
+          Agregar folder
         </div>
       </div>
 

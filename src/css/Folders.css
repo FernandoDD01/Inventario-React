@@ -46,13 +46,25 @@
 }
 
 .add-folder {
+  position: relative;
+
+  bottom: 5px;
+  padding: 5px;
+  margin-bottom: 5px;
   cursor: pointer;
   margin-left: 5px;
+  border-radius: 100px;
+  box-shadow: 1px 1px 10px black;
+  background-color: rgb(105, 104, 104);
+
   transform: translateY(6px);
   order: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-folder i {
-  border: solid black;
-  border-radius: 10px;
+  margin: 2px;
 }

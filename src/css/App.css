@@ -125,6 +125,11 @@ footer {
   margin: 10px;
 }
 
+.list-nav a {
+  color: rgb(233, 236, 239, 0.5);
+  text-decoration: none;
+}
+
 .menu-item {
   cursor: pointer;
   padding: 10px;
@@ -139,7 +144,13 @@ footer {
 
 .menu-item:hover {
   transition: all 0.2s ease;
-  border-left: solid 5px black;
+  border-left: solid 5px rgb(21, 9, 63);
+  color: rgb(233, 236, 239, 1);
+  background-color: rgb(126, 141, 180);
+}
+
+.active-link div {
+  border-left: solid 5px rgb(21, 9, 63);
   color: rgb(233, 236, 239, 1);
   background-color: rgb(126, 141, 180);
 }
@@ -167,6 +178,16 @@ footer.dark i:hover {
 
 footer div {
   margin: 5px;
+}
+
+.empty-dashboard {
+  font-weight: bolder;
+  font-size: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
 }
 
 .contact-icons {

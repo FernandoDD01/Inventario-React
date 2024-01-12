@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/themeContext";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Aside() {
   const { theme } = useContext(ThemeContext);
@@ -16,23 +17,46 @@ export default function Aside() {
         <div className="menu nav-item">
           <div className="title-nav">Menú</div>
           <div className="list-nav">
-            <div className="menu-item">
-              <i className="bx bx-folder-open bx-sm"></i>Inventario
-            </div>
-            <div className="menu-item">
-              <i className="bx bxs-pie-chart-alt-2 bx-sm"></i>Estadísticas
-            </div>
-            <div className="menu-item">
-              <i className="bx bx-receipt bx-sm"></i>Guía de uso
-            </div>
+            <NavLink
+              to="/inventario"
+              className={({ isActive }) => (isActive ? "active-link" : null)}
+            >
+              <div className="menu-item">
+                <i className="bx bx-folder-open bx-sm"></i>Inventario
+              </div>
+            </NavLink>
+
+            <NavLink
+              to="/estadisticas"
+              className={({ isActive }) => (isActive ? "active-link" : null)}
+            >
+              <div className="menu-item">
+                <i className="bx bxs-pie-chart-alt-2 bx-sm"></i>Estadísticas
+              </div>
+            </NavLink>
+
+            <NavLink
+              to="/guia"
+              className={({ isActive }) => (isActive ? "active-link" : null)}
+            >
+              <div className="menu-item">
+                <i className="bx bx-receipt bx-sm"></i>Guía de uso
+              </div>
+            </NavLink>
           </div>
         </div>
         <div className="profile nav-item">
           <div className="title-nav">Perfil</div>
           <div className="list-nav">
-            <div className="menu-item">
-              <i className="bx bx-cog bx-sm"></i> Ajustes
-            </div>
+            <NavLink
+              to="/ajustes"
+              className={({ isActive }) => (isActive ? "active-link" : null)}
+            >
+              <div className="menu-item">
+                <i className="bx bx-cog bx-sm"></i> Ajustes
+              </div>
+            </NavLink>
+
             <div className="menu-item">
               <i className="bx bx-log-out bx-sm"></i> Cerrar sesión
             </div>
