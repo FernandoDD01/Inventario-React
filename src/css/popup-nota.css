@@ -6,17 +6,12 @@
   align-items: center;
 }
 
-.cont-pop-product h2 {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 .nota-content {
   height: auto;
   background-color: white;
   font-family: "Quicksand", sans-serif;
   font-style: italic;
-  margin: 40px;
+  margin: 10px;
   font-size: 20px;
 }
 

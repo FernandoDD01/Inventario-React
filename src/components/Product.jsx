@@ -179,8 +179,8 @@ export default function Product({ categoryName, product }) {
         <div className="lista-content"></div>
 
         <textarea
-          cols="15"
-          rows="5"
+          cols="30"
+          rows="10"
           className="nota-content"
           placeholder="No hay notas"
           value={note}
@@ -260,6 +260,7 @@ export default function Product({ categoryName, product }) {
             </p>
           )}
           <div className="cuantificador-edit">
+            <p style={{ margin: "0px 0px 5px 0px" }}>Cantidad:</p>
             <input
               type="number"
               className="input-new-cantidad-edit"
@@ -301,14 +302,19 @@ export default function Product({ categoryName, product }) {
             </p>
           )}
 
-          <input
-            type="number"
-            className="input-new-precio-edit"
-            placeholder="Precio"
-            name="Precio"
-            value={inputEditProduct.Precio}
-            onChange={handleChangeEditProduct}
-          />
+          <div className="precio-edit">
+            {" "}
+            <p style={{ margin: "0px 0px 5px 0px" }}>Precio:</p>
+            <input
+              type="number"
+              className="input-new-precio-edit"
+              placeholder="Precio"
+              name="Precio"
+              value={inputEditProduct.Precio}
+              onChange={handleChangeEditProduct}
+            />
+          </div>
+
           <input
             type="text"
             className="input-new-enlace-edit"

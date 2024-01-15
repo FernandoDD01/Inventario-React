@@ -324,7 +324,6 @@ export default function Category({
               El nombre es un campo obligatorio
             </p>
           )}
-
           {warningAddProduct.duplicate === true && (
             <p
               className="adver-product"
@@ -333,7 +332,6 @@ export default function Category({
               El nombre ya esta en uso
             </p>
           )}
-
           {warningAddProduct.withSpaces === true && (
             <p
               className="adver-product"
@@ -358,7 +356,6 @@ export default function Category({
               La cantidad no puede ser menor que 1
             </p>
           )}
-
           {warningAddProduct.voidQuantity === true && (
             <p
               className="adver-product"
@@ -367,7 +364,9 @@ export default function Category({
               La cantidad es un campo obligatorio
             </p>
           )}
+
           <div className="cuantificador">
+            <p>Cantidad:</p>
             <input
               type="number"
               className="input-new-cantidad"
@@ -397,7 +396,6 @@ export default function Category({
               El precio no puede ser menor que
             </p>
           )}
-
           {warningAddProduct.voidPrice === true && (
             <p
               className="adver-product"
@@ -406,14 +404,19 @@ export default function Category({
               El precio es un campo obligatorio
             </p>
           )}
-          <input
-            type="number"
-            className="input-new-precio"
-            placeholder="Precio"
-            name="Precio"
-            onChange={handleChange}
-            value={inputNewProduct.Precio}
-          />
+
+          <div className="precio">
+            <p style={{ margin: "0px 0px 5px 0px" }}>Precio:</p>
+            <input
+              type="number"
+              className="input-new-precio"
+              placeholder="Precio"
+              name="Precio"
+              onChange={handleChange}
+              value={inputNewProduct.Precio}
+            />
+          </div>
+
           <input
             type="text"
             className="input-new-enlace"
@@ -432,7 +435,6 @@ export default function Category({
             onChange={handleChange}
             value={inputNewProduct.Nota}
           ></textarea>
-
           <button className="btn-add-product" type="submit">
             Agregar
           </button>

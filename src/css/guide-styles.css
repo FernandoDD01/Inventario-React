@@ -41,6 +41,10 @@
   text-align: left;
 }
 
+.section-content-guide img {
+  border-radius: 10px;
+}
+
 .subtitle-guide {
   display: flex;
   flex-direction: row;
@@ -72,4 +76,9 @@
 .btn-return:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.content-img {
+  display: flex;
+  justify-content: center;
 }

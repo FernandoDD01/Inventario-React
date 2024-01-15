@@ -35,7 +35,22 @@
 }
 .cuantificador-edit {
   display: flex;
+  align-items: baseline;
   gap: 20px;
+}
+
+.precio-edit {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.input-new-cantidad-edit {
+  width: 100px;
+}
+
+.input-new-precio-edit {
+  width: 200px;
 }
 
 .input-new-nota-edit {
