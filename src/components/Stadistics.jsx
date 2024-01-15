@@ -6,5 +6,7 @@ import { ThemeContext } from "../context/themeContext";
 export default function Stadistics() {
   const { theme } = useContext(ThemeContext);
 
-  return <main>Estadísticas</main>;
+  return (
+    <main className={`${theme.darkmode ? "dark" : "light"}`}>Estadísticas</main>
+  );
 }

@@ -13,6 +13,7 @@ import "./css/popup-edit-category.css";
 import "./css/popup-edit-product.css";
 import "./css/popup-nota.css";
 import "./css/template-products.css";
+import "./css/guide-styles.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -34,8 +35,9 @@ function App() {
       <BrowserRouter>
         <ThemeProvider>
           <Aside />
-          <ViewProvider>
-            <FoldersProvider>
+
+          <FoldersProvider>
+            <ViewProvider>
               <div className="main">
                 <Header />
 
@@ -50,8 +52,8 @@ function App() {
 
                 <Footer />
               </div>
-            </FoldersProvider>
-          </ViewProvider>
+            </ViewProvider>
+          </FoldersProvider>
         </ThemeProvider>
       </BrowserRouter>
     </>

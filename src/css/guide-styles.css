@@ -1,0 +1,75 @@
+.guide {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: Poppins;
+}
+
+.fast-start {
+  width: 100%;
+  padding: 0px 0px 0px 50px !important;
+  text-align: left;
+  display: flex;
+}
+
+.fast-start a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.fast-start a:hover {
+  color: rgb(63, 90, 160);
+  transition: all 0.2s;
+  h4 {
+    text-decoration: underline;
+  }
+}
+
+.refer {
+  width: 100%;
+  height: 60px;
+}
+
+.guide section {
+  width: 100%;
+  padding: 50px 100px 50px 100px;
+}
+
+.section-content-guide {
+  text-align: left;
+}
+
+.subtitle-guide {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.subtitle-guide a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.index-guide {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.index-guide a {
+  text-decoration: underline;
+  cursor: pointer;
+  color: inherit;
+}
+
+.index-guide a:hover {
+  color: rgb(63, 90, 160);
+  transition: all 0.2s;
+}
+
+.btn-return:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

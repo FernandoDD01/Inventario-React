@@ -5,10 +5,12 @@ import { ViewContext } from "../context/viewContext";
 import Folder from "./Folder";
 import useModal from "../hooks/useModal";
 import { ModalAddFolder, ModalDeleteFolder } from "./ModalsFolders";
+import { ThemeContext } from "../context/themeContext";
 
 export default function Folders() {
   const { folders, addFolder, deleteFolder } = useContext(FoldersContext);
   const { view, handleView } = useContext(ViewContext);
+  const { theme } = useContext(ThemeContext);
   const [input, setInput] = useState({ Nombre: "" });
   const [clickDelFolder, setClickDelFolder] = useState("");
 
@@ -132,7 +134,10 @@ export default function Folders() {
             );
           })}
 
-        <div className="add-folder" onClick={openModalAddFolder}>
+        <div
+          className={`add-folder ${theme.darkmode ? "dark" : "light"}`}
+          onClick={openModalAddFolder}
+        >
           <i className="bx bx-folder-plus bx-sm"></i>
           Agregar folder
         </div>

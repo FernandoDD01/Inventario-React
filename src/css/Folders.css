@@ -55,7 +55,7 @@
   margin-left: 5px;
   border-radius: 100px;
   box-shadow: 1px 1px 10px black;
-  background-color: rgb(105, 104, 104);
+  background-color: white;
 
   transform: translateY(6px);
   order: 2;
@@ -63,6 +63,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.add-folder.dark {
+  background-color: rgb(105, 104, 104);
 }
 
 .add-folder i {
