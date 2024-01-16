@@ -75,3 +75,11 @@
   font-family: Poppins;
   font-size: 1.5rem;
 }
+
+.data-table {
+  margin: 50px;
+}
+
+.title-table {
+  font-size: 1.5rem;
+}

@@ -26,7 +26,8 @@ export default function Stadistics() {
           total_products += 0;
         } else {
           Object.values(categoria)[0].Productos.forEach((producto) => {
-            total_price += parseFloat(producto.Precio);
+            total_price +=
+              parseFloat(producto.Precio) * parseFloat(producto.Cantidad);
             total_products += parseFloat(producto.Cantidad);
           });
         }
@@ -35,6 +36,9 @@ export default function Stadistics() {
   });
 
   console.log(total_products);
+
+  let productos_categoria = 0;
+  let precio_categoria = 0;
 
   return (
     <main className={`${theme.darkmode ? "dark" : "light"}`}>
@@ -75,7 +79,65 @@ export default function Stadistics() {
         </section>
 
         <section className="pie">
-          <GraphicCircle></GraphicCircle>
+          <GraphicCircle
+            folders={folders}
+            total_price={total_price}
+          ></GraphicCircle>
+        </section>
+        <section className="data-table">
+          <div className="title-table">Folders</div>
+          <div className="tables">
+            {folders.length === 0
+              ? "No hay folders"
+              : folders.map((folder, index) => {
+                  return (
+                    <>
+                      <div key={index} className="row-table">
+                        <div className="row-name">{`Folder: ${folder.Nombre}`}</div>
+                        {folder.Categorias.length === 0
+                          ? "No tiene categorias"
+                          : folder.Categorias.map((categoria, index) => {
+                              productos_categoria = 0;
+                              precio_categoria = 0;
+                              return (
+                                <div key={index} className="category-data">
+                                  <div className="category-name">{`Categoría: ${
+                                    Object.keys(categoria)[0]
+                                  }`}</div>
+
+                                  {Object.values(
+                                    categoria
+                                  )[0].Productos.forEach((producto) => {
+                                    productos_categoria += parseFloat(
+                                      producto.Cantidad
+                                    );
+
+                                    precio_categoria +=
+                                      parseFloat(producto.Cantidad) *
+                                      parseFloat(producto.Precio);
+                                  })}
+
+                                  <div className="products-on-category">
+                                    {productos_categoria}
+                                  </div>
+                                  <div className="price-of-category">
+                                    {precio_categoria}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                      </div>
+
+                      <div className="graphic">
+                        <GraphicCircle
+                          folders={folders}
+                          total_price={total_price}
+                        ></GraphicCircle>
+                      </div>
+                    </>
+                  );
+                })}
+          </div>
         </section>
       </div>
     </main>

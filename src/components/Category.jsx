@@ -140,7 +140,7 @@ export default function Category({
       return;
     }
 
-    if (parseFloat(inputNewProduct.Cantidad) < 1) {
+    if (parseFloat(inputNewProduct.Cantidad) < 0.01) {
       setWarningAddProduct({ ...warningAddProduct, negative: true });
       return;
     }
@@ -353,7 +353,7 @@ export default function Category({
               className="adver-product"
               style={{ display: "block", fontSize: "12px", color: "red" }}
             >
-              La cantidad no puede ser menor que 1
+              La cantidad no puede ser menor que 0.01
             </p>
           )}
           {warningAddProduct.voidQuantity === true && (
