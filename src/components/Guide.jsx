@@ -6,6 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 
 export default function Guide() {
   const { theme } = useContext(ThemeContext);
+
   const handleReturn = () => {
     window.scrollTo(document.documentElement.scrollY, 0);
   };

@@ -14,6 +14,7 @@ import "./css/popup-edit-product.css";
 import "./css/popup-nota.css";
 import "./css/template-products.css";
 import "./css/guide-styles.css";
+import "./css/stadistics-styles.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

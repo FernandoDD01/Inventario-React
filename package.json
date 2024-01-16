@@ -16,7 +16,8 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
-    "toastify-js": "^1.12.0"
+    "toastify-js": "^1.12.0",
+    "use-count-up": "^3.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
