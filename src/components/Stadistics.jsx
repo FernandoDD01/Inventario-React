@@ -78,7 +78,7 @@ export default function Stadistics() {
           </div>
         </section>
 
-        <section className="pie">
+        <section className="general-graphic">
           <GraphicCircle
             folders={folders}
             total_price={total_price}
@@ -87,56 +87,60 @@ export default function Stadistics() {
         <section className="data-table">
           <div className="title-table">Folders</div>
           <div className="tables">
-            {folders.length === 0
-              ? "No hay folders"
-              : folders.map((folder, index) => {
-                  return (
-                    <>
-                      <div key={index} className="row-table">
-                        <div className="row-name">{`Folder: ${folder.Nombre}`}</div>
-                        {folder.Categorias.length === 0
-                          ? "No tiene categorias"
-                          : folder.Categorias.map((categoria, index) => {
-                              productos_categoria = 0;
-                              precio_categoria = 0;
-                              return (
-                                <div key={index} className="category-data">
-                                  <div className="category-name">{`Categoría: ${
-                                    Object.keys(categoria)[0]
-                                  }`}</div>
+            {folders.length === 0 ? (
+              <div className="void-folders">No hay folders</div>
+            ) : (
+              folders.map((folder, index) => {
+                return (
+                  <div key={index} className="conjunto-row-graphic">
+                    <div key={index} className="row-table">
+                      <div className="row-name">{`Folder: ${folder.Nombre}`}</div>
+                      {folder.Categorias.length === 0 ? (
+                        <div className="category-data">No tiene categorias</div>
+                      ) : (
+                        folder.Categorias.map((categoria, index) => {
+                          productos_categoria = 0;
+                          precio_categoria = 0;
+                          return (
+                            <div key={index} className="category-data">
+                              <div className="category-name">{`Categoría: ${
+                                Object.keys(categoria)[0]
+                              }`}</div>
 
-                                  {Object.values(
-                                    categoria
-                                  )[0].Productos.forEach((producto) => {
-                                    productos_categoria += parseFloat(
-                                      producto.Cantidad
-                                    );
+                              {Object.values(categoria)[0].Productos.forEach(
+                                (producto) => {
+                                  productos_categoria += parseFloat(
+                                    producto.Cantidad
+                                  );
 
-                                    precio_categoria +=
-                                      parseFloat(producto.Cantidad) *
-                                      parseFloat(producto.Precio);
-                                  })}
+                                  precio_categoria +=
+                                    parseFloat(producto.Cantidad) *
+                                    parseFloat(producto.Precio);
+                                }
+                              )}
 
-                                  <div className="products-on-category">
-                                    {productos_categoria}
-                                  </div>
-                                  <div className="price-of-category">
-                                    {precio_categoria}
-                                  </div>
-                                </div>
-                              );
-                            })}
-                      </div>
+                              <div className="products-on-category">
+                                {`No. de productos: ${productos_categoria}`}
+                              </div>
+                              <div className="price-of-category">
+                                {`Subtotal: ${precio_categoria}`}
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
 
-                      <div className="graphic">
-                        <GraphicCircle
-                          folders={folders}
-                          total_price={total_price}
-                        ></GraphicCircle>
-                      </div>
-                    </>
-                  );
-                })}
+                    <div className="graphic">
+                      <GraphicCircle
+                        folders={folders}
+                        total_price={total_price}
+                      ></GraphicCircle>
+                    </div>
+                  </div>
+                );
+              })
+            )}
           </div>
         </section>
       </div>

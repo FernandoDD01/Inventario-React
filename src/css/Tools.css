@@ -12,6 +12,9 @@
 }
 
 .add-category {
+  width: 100%;
+  max-width: 1200px;
+
   padding: 10px 20px 10px 20px;
   border-top-right-radius: 40px;
   border-top-left-radius: 40px;

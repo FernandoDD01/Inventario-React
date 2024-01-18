@@ -1,7 +1,7 @@
 :root {
-  --color-header: rgb(91, 114, 173);
+  --color-header: #5b72adff;
   --color-header-dark: rgb(26, 1, 42);
-  --color-footer-dark: rgb(29, 1, 48);
+  --color-footer-dark: rgb(24, 30, 45);
   --color-content-dark: rgb(52, 52, 56);
   --color-content-light: white;
 }
@@ -85,6 +85,7 @@ main {
 
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 main.dark {
@@ -224,6 +225,8 @@ footer div {
 }
 
 .content {
+  width: 100%;
+  max-width: 1200px;
   flex: 1;
   padding: 20px;
   margin: 0px 10px 0px 10px;

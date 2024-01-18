@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import { Chart, Doughnut } from "react-chartjs-2";
 
 export default function GraphicCircle({ folders, total_price }) {
   const randomColor = () => {
@@ -102,5 +102,5 @@ export default function GraphicCircle({ folders, total_price }) {
       },
     ],
   };
-  return <Pie data={data} options={options} />;
+  return <Doughnut data={data} options={options} />;
 }

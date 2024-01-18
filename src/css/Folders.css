@@ -1,4 +1,6 @@
 .folders {
+  width: 100%;
+  max-width: 1200px;
   position: relative;
   margin-left: 40px;
   margin-right: 40px;
@@ -7,6 +9,7 @@
 
   z-index: 3;
   bottom: -5;
+  padding-left: 20px;
 }
 
 .folder {
