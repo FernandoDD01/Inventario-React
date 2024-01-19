@@ -82,11 +82,29 @@
 }
 
 .general-graphic {
-  height: 200px;
-  padding: 10px;
+  margin-top: 20px;
+  width: 400px;
+  padding: 20px;
   border-radius: 20px;
   background-color: #414372ff;
   box-shadow: 2px 2px 5px black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-general-graphic {
+  position: relative;
+  top: -20px;
+  font-size: 1.5rem;
+  background-color: #141a28;
+  padding: 15px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.graphic-donute {
+  height: 200px;
 }
 
 .data-table {
@@ -98,7 +116,6 @@
   font-size: 1.5rem;
   width: 100%;
   text-align: center;
-  padding: 20px;
 }
 
 .conjunto-row-graphic {

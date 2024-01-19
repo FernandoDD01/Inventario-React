@@ -5,6 +5,7 @@ import GraphicCircle from "./GraphicCircle";
 
 import { CountUp } from "use-count-up";
 import { FoldersContext } from "../context/foldersContext";
+import GraphicCircleIndividual from "./GraphicCircleIndividual";
 
 export default function Stadistics() {
   const { theme } = useContext(ThemeContext);
@@ -79,13 +80,17 @@ export default function Stadistics() {
         </section>
 
         <section className="general-graphic">
-          <GraphicCircle
-            folders={folders}
-            total_price={total_price}
-          ></GraphicCircle>
+          <div className="title-general-graphic">Gráfica general</div>
+
+          <div className="graphic-donute">
+            <GraphicCircle
+              folders={folders}
+              total_price={total_price}
+            ></GraphicCircle>
+          </div>
         </section>
         <section className="data-table">
-          <div className="title-table">Folders</div>
+          <div className="title-table">Folders:</div>
           <div className="tables">
             {folders.length === 0 ? (
               <div className="void-folders">No hay folders</div>
@@ -123,7 +128,13 @@ export default function Stadistics() {
                                 {`No. de productos: ${productos_categoria}`}
                               </div>
                               <div className="price-of-category">
-                                {`Subtotal: ${precio_categoria}`}
+                                {`Subtotal: ${precio_categoria.toLocaleString(
+                                  "es-MX",
+                                  {
+                                    style: "currency",
+                                    currency: "MXN",
+                                  }
+                                )}`}
                               </div>
                             </div>
                           );
@@ -132,10 +143,10 @@ export default function Stadistics() {
                     </div>
 
                     <div className="graphic">
-                      <GraphicCircle
+                      <GraphicCircleIndividual
                         folders={folders}
-                        total_price={total_price}
-                      ></GraphicCircle>
+                        folderName={folder.Nombre}
+                      ></GraphicCircleIndividual>
                     </div>
                   </div>
                 );

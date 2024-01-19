@@ -1,8 +1,8 @@
 import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { Chart, Doughnut } from "react-chartjs-2";
 
-export default function GraphicCircle({ folders, total_price }) {
+export default function GraphicCircleIndividual({ folders, folderName }) {
   const randomColor = () => {
     const colors = [
       "rgb(255, 0, 0)",
@@ -53,62 +53,76 @@ export default function GraphicCircle({ folders, total_price }) {
   let border_color = [];
   let size = [];
   let porcion = 0;
+  let subtotal = 0;
 
-  if (folders.length === 0) {
-    names = ["No hay folders"];
+  console.log(folders);
+
+  console.log(folderName);
+
+  if (
+    folders.find((folder) => {
+      return folder.Nombre === folderName;
+    }).Categorias.length === 0
+  ) {
+    names = ["No hay categorias"];
+    subtotal += 0;
   } else {
-    folders.forEach((folder) => {
-      names.push(folder.Nombre);
-      border_color.push(randomColor());
-      if (folder.Categorias.length === 0) {
-        porcion += 0;
-      } else {
-        folder.Categorias.forEach((categoria) => {
-          if (Object.values(categoria)[0].Productos.length === 0) {
-            porcion += 0;
-          } else {
-            Object.values(categoria)[0].Productos.forEach((producto) => {
-              porcion +=
-                parseFloat(producto.Precio) * parseFloat(producto.Cantidad);
-            });
-          }
-        });
-      }
-      size.push((porcion * 100) / total_price);
-      porcion = 0;
-    });
+    folders
+      .find((folder) => {
+        return folder.Nombre === folderName;
+      })
+      .Categorias.forEach((categoria) => {
+        if (Object.values(categoria)[0].Productos.length === 0) {
+          subtotal += 0;
+        } else {
+          Object.values(categoria)[0].Productos.forEach((producto) => {
+            subtotal +=
+              parseFloat(producto.Precio) * parseFloat(producto.Cantidad);
+          });
+        }
+        console.log(subtotal);
+      });
 
-    border_color.forEach((border) => {
-      color.push(modifyColorOpacity(border));
-    });
+    folders
+      .find((folder) => {
+        return folder.Nombre === folderName;
+      })
+      .Categorias.forEach((categoria) => {
+        porcion = 0;
+        border_color.push(randomColor());
+        names.push(Object.keys(categoria)[0]);
+
+        if (Object.values(categoria)[0].Productos.length === 0) {
+          porcion += 0;
+        } else {
+          Object.values(categoria)[0].Productos.forEach((producto) => {
+            porcion +=
+              parseFloat(producto.Precio) * parseFloat(producto.Cantidad);
+          });
+        }
+
+        size.push((porcion * 100) / subtotal);
+      });
   }
+
+  console.log(size);
+  border_color.forEach((border) => {
+    color.push(modifyColorOpacity(border));
+  });
+
   console.log(color);
   ChartJS.register(ArcElement, Tooltip, Legend);
 
   var options = {
     responsive: true,
     maintainAspectRatio: false,
-
-    plugins: {
-      legend: {
-        labels: {
-          // This more specific font property overrides the global property
-          font: {
-            size: 17,
-          },
-          color: "white",
-        },
-      },
-    },
   };
-
-  console.log(border_color);
 
   var data = {
     labels: names,
     datasets: [
       {
-        label: "Tamaño del folder",
+        label: "Porcentaje",
         data: size,
         backgroundColor: border_color,
         borderColor: border_color,
