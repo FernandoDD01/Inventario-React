@@ -5,7 +5,7 @@ import { db } from "../firebase/firebase";
 import { CHANGES } from "../actions/darkmodeActions";
 
 export function folderReducer(state, action) {
-  console.log(state);
+  let ids = [];
   switch (action.type) {
     case TYPES.ADD_FOLDER: {
       console.log("Folder añadido", action.payload);
@@ -13,14 +13,21 @@ export function folderReducer(state, action) {
       //Se obtiene el id del ultimo elemento
       if (state.folders.length === 0) {
         idLastElement = 0;
+      } else {
+        state.folders.forEach((folder) => {
+          ids.push(folder.id);
+        });
+
+        idLastElement = Math.max(...ids);
       }
 
+      /*
       if (state.folders.length === 1) {
         idLastElement = 1;
       }
       if (state.folders.length >= 2) {
         idLastElement = state.folders[state.folders.length - 1].id;
-      }
+      }*/
 
       // Add a new document in collection "cities"
       setDoc(doc(db, "Folders", `${action.payload}`), {

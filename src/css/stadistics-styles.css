@@ -23,11 +23,15 @@
   font-family: Poppins;
   font-size: 1.5rem;
   font-weight: 600;
-  background-color: gray;
+  background-color: white;
   margin: 20px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 2px 2px 10px black;
+}
+
+.total-price.dark {
+  background-color: gray;
 }
 
 .total-price i {
@@ -46,11 +50,15 @@
   font-size: 1.5rem;
   font-weight: 600;
 
-  background-color: gray;
+  background-color: white;
   margin: 20px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 2px 2px 10px black;
+}
+
+.total-products.dark {
+  background-color: gray;
 }
 
 .total-products i {
@@ -86,21 +94,29 @@
   width: 400px;
   padding: 20px;
   border-radius: 20px;
-  background-color: #414372ff;
+  background-color: #aaabc5;
   box-shadow: 2px 2px 5px black;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.general-graphic.dark {
+  background-color: #414372ff;
+}
+
 .title-general-graphic {
   position: relative;
   top: -20px;
   font-size: 1.5rem;
-  background-color: #141a28;
+  background-color: #838da3;
   padding: 15px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+
+.title-general-graphic.dark {
+  background-color: #141a28;
 }
 
 .graphic-donute {
@@ -123,9 +139,13 @@
   align-items: stretch;
   margin: 50px;
   border-radius: 20px;
-  background-color: rgb(91, 114, 173);
+  background-color: #b7ceff;
   box-shadow: 2px 2px 5px black;
   color: inherit;
+}
+
+.conjunto-row-graphic.dark {
+  background-color: rgb(91, 114, 173);
 }
 
 .row-table {
@@ -140,10 +160,15 @@
 .row-name {
   font-size: 1.5rem;
   padding: 20px;
-  background-color: #141a28;
+  background-color: #838da3;
+
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   opacity: 0.9;
+}
+
+.row-name.dark {
+  background-color: #141a28;
 }
 
 .category-data {
@@ -152,17 +177,26 @@
 }
 
 .graphic {
-  background-color: #b7ceff;
+  background-color: white;
   width: 50%;
   border-radius: 20px;
   padding: 20px;
 }
 
+.graphic.dark {
+  background-color: #b7ceff;
+}
+
 .category-name {
   padding: 10px;
   font-size: 1.25rem;
-  background-color: #2a3654;
+  background-color: rgb(91, 114, 173);
+
   border-radius: 15px;
+}
+
+.category-name.dark {
+  background-color: #2a3654;
 }
 
 .products-on-category {

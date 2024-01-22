@@ -49,7 +49,9 @@ export default function Stadistics() {
         <section className="total-inventary">
           <div className="conjunto-total-price">
             <div className="title-total-price">Costo total del inventario:</div>
-            <div className="total-price">
+            <div
+              className={` total-price ${theme.darkmode ? "dark" : "light"}`}
+            >
               <i className="bx bx-money bx-md"></i>
               <CountUp
                 isCounting
@@ -67,7 +69,9 @@ export default function Stadistics() {
 
           <div className="conjunto-total-products">
             <div className="title-total-products">Total de productos:</div>
-            <div className="total-products">
+            <div
+              className={` total-products ${theme.darkmode ? "dark" : "light"}`}
+            >
               <i className="bx bxs-purchase-tag bx-md"></i>
               <CountUp
                 isCounting
@@ -79,8 +83,16 @@ export default function Stadistics() {
           </div>
         </section>
 
-        <section className="general-graphic">
-          <div className="title-general-graphic">Gráfica general</div>
+        <section
+          className={`general-graphic ${theme.darkmode ? "dark" : "light"}`}
+        >
+          <div
+            className={`title-general-graphic ${
+              theme.darkmode ? "dark" : "light"
+            }`}
+          >
+            Gráfica general
+          </div>
 
           <div className="graphic-donute">
             <GraphicCircle
@@ -97,20 +109,31 @@ export default function Stadistics() {
             ) : (
               folders.map((folder, index) => {
                 return (
-                  <div key={index} className="conjunto-row-graphic">
-                    <div key={index} className="row-table">
-                      <div className="row-name">{`Folder: ${folder.Nombre}`}</div>
+                  <div
+                    key={index}
+                    className={`conjunto-row-graphic ${
+                      theme.darkmode ? "dark" : "light"
+                    }`}
+                  >
+                    <div className="row-table">
+                      <div
+                        className={`row-name ${
+                          theme.darkmode ? "dark" : "light"
+                        }`}
+                      >{`Folder: ${folder.Nombre}`}</div>
                       {folder.Categorias.length === 0 ? (
                         <div className="category-data">No tiene categorias</div>
                       ) : (
-                        folder.Categorias.map((categoria, index) => {
+                        folder.Categorias.map((categoria, index2) => {
                           productos_categoria = 0;
                           precio_categoria = 0;
                           return (
-                            <div key={index} className="category-data">
-                              <div className="category-name">{`Categoría: ${
-                                Object.keys(categoria)[0]
-                              }`}</div>
+                            <div key={index2 + 10} className="category-data">
+                              <div
+                                className={`category-name ${
+                                  theme.darkmode ? "dark" : "light"
+                                }`}
+                              >{`Categoría: ${Object.keys(categoria)[0]}`}</div>
 
                               {Object.values(categoria)[0].Productos.forEach(
                                 (producto) => {
@@ -142,11 +165,15 @@ export default function Stadistics() {
                       )}
                     </div>
 
-                    <div className="graphic">
-                      <GraphicCircleIndividual
-                        folders={folders}
-                        folderName={folder.Nombre}
-                      ></GraphicCircleIndividual>
+                    <div
+                      className={`graphic ${theme.darkmode ? "dark" : "light"}`}
+                    >
+                      {
+                        <GraphicCircleIndividual
+                          folders={folders}
+                          folderName={folder.Nombre}
+                        ></GraphicCircleIndividual>
+                      }
                     </div>
                   </div>
                 );

@@ -324,7 +324,7 @@ export default function Dashboard() {
               {filteredCategories.Categorias.map((categoria, index) => {
                 return (
                   <>
-                    <div key={index} className="categoria-list">
+                    <div key={index + 100} className="categoria-list">
                       {Object.keys(categoria)[0]}
                     </div>
                     {console.log(categoria)}
