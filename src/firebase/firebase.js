@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://support.google.com/firebase/answer/7015592
@@ -13,15 +14,14 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
+//Inicialización de Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Cloud Firestore and get a reference to the service
+//Inicialización de Firestore (La DB de Firebase)
 export const db = getFirestore(app);
-
-import { collection, getDocs } from "firebase/firestore";
-
+//En "folders" se van guardar todos los documentos que se obtengan de la consulta la base de datos
 export const folders = [];
+//En "mode" se obtiene el estado del darkmode (que igual esta en la base de datos)
 export let mode = {};
 
 const querySnapshotMode = await getDocs(collection(db, "Darkmode"));
@@ -31,8 +31,5 @@ querySnapshotMode.forEach((doc) => {
 
 const querySnapshot = await getDocs(collection(db, "Folders"));
 querySnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data().Nombre}`);
   folders.push(doc.data());
 });
-
-console.log(folders);

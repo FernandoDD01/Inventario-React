@@ -62,6 +62,11 @@ export default function Aside() {
             </div>
           </div>
         </div>
+
+        <div className="importante">
+          <b>Importante:</b> Al ser esta una versión pública la información no
+          se guardará en la base de datos.
+        </div>
         <div className="contact">
           <div className="title-nav">Contacto</div>
 

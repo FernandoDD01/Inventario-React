@@ -1,3 +1,4 @@
+//Acciones principales que realizara la App
 export const TYPES = {
   ADD_FOLDER: "ADD_FOLDER",
   DELETE_FOLDER: "DELETE_FOLDER",

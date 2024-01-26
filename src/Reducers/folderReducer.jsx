@@ -1,16 +1,18 @@
 import { TYPES } from "../actions/folderActions";
 import { doc, setDoc, deleteDoc } from "firebase/firestore";
-
 import { db } from "../firebase/firebase";
 import { CHANGES } from "../actions/darkmodeActions";
+
+//En este Reducer se maneja el estado de los folders, además de realizar las peticiones a la base de datos
+//EL código de las consultas esta comentado, para que no se modifique la base de datos (ya que esta es una versión pública)
+//Sin embargo, la base de datos es completamente funcional
 
 export function folderReducer(state, action) {
   let ids = [];
   switch (action.type) {
     case TYPES.ADD_FOLDER: {
-      console.log("Folder añadido", action.payload);
       let idLastElement = 0;
-      //Se obtiene el id del ultimo elemento
+      //Se obtiene el id del ultimo elemento (folder)
       if (state.folders.length === 0) {
         idLastElement = 0;
       } else {
@@ -21,20 +23,12 @@ export function folderReducer(state, action) {
         idLastElement = Math.max(...ids);
       }
 
-      /*
-      if (state.folders.length === 1) {
-        idLastElement = 1;
-      }
-      if (state.folders.length >= 2) {
-        idLastElement = state.folders[state.folders.length - 1].id;
-      }*/
-
-      // Add a new document in collection "cities"
-      setDoc(doc(db, "Folders", `${action.payload}`), {
+      // Agrega un nuevo Folder a la DB de Firebase
+      /*setDoc(doc(db, "Folders", `${action.payload}`), {
         id: idLastElement + 1,
         Nombre: `${action.payload}`,
         Categorias: [],
-      });
+      });*/
 
       return {
         folders: [
@@ -49,9 +43,8 @@ export function folderReducer(state, action) {
     }
 
     case TYPES.DELETE_FOLDER: {
-      console.log("Se borro el folder", action.payload);
-
-      deleteDoc(doc(db, "Folders", `${action.payload}`));
+      //Borra un folder en la DB de Firebase
+      //deleteDoc(doc(db, "Folders", `${action.payload}`));
 
       return {
         folders: state.folders.filter((folder) => {
@@ -88,15 +81,6 @@ export function folderReducer(state, action) {
         return colors[randomIndex];
       };
 
-      console.log(randomColor());
-
-      console.log(
-        "Se agrego categoria (reducer)",
-        action.payload.Nombre,
-        "En la vista:",
-        action.payload.View
-      );
-
       let categorias = [];
 
       state.folders
@@ -116,9 +100,11 @@ export function folderReducer(state, action) {
         },
       });
 
-      const folderRef = doc(db, "Folders", action.payload.View);
-      setDoc(folderRef, { Categorias: categorias }, { merge: true });
+      //Agrega una categoria a un cierto folder en la DB de Firebase
 
+      /*const folderRef = doc(db, "Folders", action.payload.View);
+      setDoc(folderRef, { Categorias: categorias }, { merge: true });
+*/
       return {
         folders: state.folders.map((folder) => {
           return folder.Nombre === action.payload.View
@@ -140,11 +126,6 @@ export function folderReducer(state, action) {
     }
 
     case TYPES.DELETE_CATEGORY: {
-      console.log("La categoria fue borrada");
-
-      console.log(state.folders);
-      console.log(action.payload.Nombre);
-
       let categorias = [];
 
       state.folders
@@ -158,15 +139,12 @@ export function folderReducer(state, action) {
           categorias.push(categoria);
         });
 
-      const folderRef = doc(db, "Folders", action.payload.View);
+      //Borra una categoría en la DB de Firebase
+      /*const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
-
+*/
       return {
         folders: state.folders.map((folder) => {
-          console.log(folder);
-          console.log(action.payload.View);
-
-          console.log(folder.Categorias);
           return folder.Nombre === action.payload.View
             ? {
                 ...folder,
@@ -184,22 +162,11 @@ export function folderReducer(state, action) {
     }
 
     case TYPES.EDIT_CATEGORY: {
-      console.log(
-        "Se edito la categoria:",
-        action.payload.Name,
-        "a",
-        action.payload.New_name,
-        "en la vista",
-        action.payload.View
-      );
-
       let clone = structuredClone(state.folders);
 
       clone.map((folder) => {
-        console.log(folder);
         return folder.Nombre === action.payload.View
           ? folder.Categorias.map((categoria) => {
-              console.log(folder.Categorias);
               return Object.keys(categoria)[0] === action.payload.Name
                 ? ((categoria[action.payload.New_name] =
                     categoria[Object.keys(categoria)[0]]),
@@ -219,10 +186,12 @@ export function folderReducer(state, action) {
           categorias.push(categoria);
         });
 
-      const folderRef = doc(db, "Folders", action.payload.View);
+      //Edita una categoría en la DB de Firebase
+
+      /*const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
 
-      console.log("Así quedo el nombre editado", clone);
+      */
 
       return {
         folders: clone,
@@ -230,22 +199,11 @@ export function folderReducer(state, action) {
     }
 
     case TYPES.ADD_PRODUCT: {
-      console.log(
-        "se agregó el producto:",
-        action.payload.Product,
-        "En la categoria:",
-        action.payload.Category,
-        "de la vista:",
-        action.payload.View
-      );
-
       let clone = structuredClone(state.folders);
 
       clone.map((folder) => {
-        console.log(folder);
         return folder.Nombre === action.payload.View
           ? folder.Categorias.map((categoria) => {
-              console.log(folder.Categorias);
               return Object.keys(categoria)[0] === action.payload.Category
                 ? Object.values(categoria)[0].Productos.push(
                     action.payload.Product
@@ -265,31 +223,23 @@ export function folderReducer(state, action) {
           categorias.push(categoria);
         });
 
+      //Agrega un producto en cierta categoría a la DB de Firebase
+
+      /*
       const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
-
+*/
       return {
         folders: clone,
       };
     }
 
     case TYPES.DELETE_PRODUCT: {
-      console.log(
-        "se eliminó el producto:",
-        action.payload.Product,
-        "En la categoria:",
-        action.payload.Category,
-        "de la vista:",
-        action.payload.View
-      );
-
       let clone = structuredClone(state.folders);
 
       clone.map((folder) => {
-        console.log(folder);
         return folder.Nombre === action.payload.View
           ? folder.Categorias.map((categoria) => {
-              console.log(folder.Categorias);
               return Object.keys(categoria)[0] === action.payload.Category
                 ? (Object.values(categoria)[0].Productos = Object.values(
                     clone
@@ -319,10 +269,11 @@ export function folderReducer(state, action) {
           categorias.push(categoria);
         });
 
+      //Se elimina un producto en cierta categoría en la DB de Firebase
+      /*
       const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
-
-      console.log("Así quedó clone", clone);
+*/
 
       return {
         folders: clone,
@@ -330,29 +281,13 @@ export function folderReducer(state, action) {
     }
 
     case TYPES.EDIT_PRODUCT: {
-      console.log(
-        "El nuevo producto es:",
-        action.payload.New_Product,
-        "del producto antiguo es",
-        action.payload.Product,
-
-        "de la categoria",
-        action.payload.Category,
-
-        "de la vista",
-        action.payload.View
-      );
-
       let clone = structuredClone(state.folders);
 
       clone.map((folder) => {
-        console.log(folder);
         return folder.Nombre === action.payload.View
           ? folder.Categorias.map((categoria) => {
-              console.log(folder.Categorias);
               return Object.keys(categoria)[0] === action.payload.Category
                 ? Object.values(categoria)[0].Productos.map((producto) => {
-                    console.log(producto);
                     return producto.Nombre === action.payload.Product
                       ? ((producto.Nombre = action.payload.New_Product.Nombre),
                         (producto.Cantidad =
@@ -378,10 +313,10 @@ export function folderReducer(state, action) {
           categorias.push(categoria);
         });
 
-      const folderRef = doc(db, "Folders", action.payload.View);
+      //Se edita un prodcuto en cierta categoría en la DB de Firebase
+      /*const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
-
-      console.log("Así quedó clone", clone);
+*/
 
       return {
         folders: clone,
@@ -389,29 +324,13 @@ export function folderReducer(state, action) {
     }
 
     case TYPES.EDIT_NOTE: {
-      console.log(
-        "La nueva nota es:",
-        action.payload.Note,
-        "del producto",
-        action.payload.Product,
-
-        "de la categoria",
-        action.payload.Category,
-
-        "de la vista",
-        action.payload.View
-      );
-
       let clone = structuredClone(state.folders);
 
       clone.map((folder) => {
-        console.log(folder);
         return folder.Nombre === action.payload.View
           ? folder.Categorias.map((categoria) => {
-              console.log(folder.Categorias);
               return Object.keys(categoria)[0] === action.payload.Category
                 ? Object.values(categoria)[0].Productos.map((producto) => {
-                    console.log(producto);
                     return producto.Nombre === action.payload.Product
                       ? (producto.Nota = action.payload.Note)
                       : producto;
@@ -431,9 +350,10 @@ export function folderReducer(state, action) {
           categorias.push(categoria);
         });
 
-      const folderRef = doc(db, "Folders", action.payload.View);
+      //Se edita una nota de cierto prodcuto en la DB de Firebase
+      /*const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
-      console.log("Así quedó clone", clone);
+      */
 
       return {
         folders: clone,
@@ -441,11 +361,10 @@ export function folderReducer(state, action) {
     }
 
     case CHANGES.CHANGE_MODE: {
-      console.log("se cambio el tema");
-      console.log(action.payload);
-      const folderRef = doc(db, "Darkmode", "mode");
+      //Se cambia el tema de la página web en la DB de Firebase
+      /* const folderRef = doc(db, "Darkmode", "mode");
       setDoc(folderRef, { darkmode: action.payload });
-
+*/
       return state;
     }
 
