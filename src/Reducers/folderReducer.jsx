@@ -1,6 +1,6 @@
 import { TYPES } from "../actions/folderActions";
-import { doc, setDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+//import { doc, setDoc, deleteDoc } from "firebase/firestore";
+//import { db } from "../firebase/firebase";
 import { CHANGES } from "../actions/darkmodeActions";
 
 //En este Reducer se maneja el estado de los folders, además de realizar las peticiones a la base de datos
@@ -290,6 +290,8 @@ export function folderReducer(state, action) {
           : folder;
       });
 
+      //El arrego "categorias" solo se va usar para insertarla en la peticiona la base de datos
+
       let categorias = [];
 
       clone
@@ -305,22 +307,26 @@ export function folderReducer(state, action) {
       const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
 */
-
+      //Retornamos al estado el clon que editamos
       return {
         folders: clone,
       };
     }
 
     case TYPES.EDIT_PRODUCT: {
+      //Primero, clonamos la estructura del objeto del estado para poder editarlo
       let clone = structuredClone(state.folders);
 
+      //Mapeamos el estado para encontrar el folder seleccionado
       clone.map((folder) => {
         return folder.Nombre === action.payload.View
           ? folder.Categorias.map((categoria) => {
+              //Mapeamos las categorias del folder para encontrar la categoría seleccionada
               return Object.keys(categoria)[0] === action.payload.Category
                 ? Object.values(categoria)[0].Productos.map((producto) => {
+                    //Mapeamos los productos de la categoría para encontrar el producto que queremos editar
                     return producto.Nombre === action.payload.Product
-                      ? ((producto.Nombre = action.payload.New_Product.Nombre),
+                      ? ((producto.Nombre = action.payload.New_Product.Nombre), //Asignamos nuevos valores a cada uno de los campos del producto
                         (producto.Cantidad =
                           action.payload.New_Product.Cantidad),
                         (producto.Unidad = action.payload.New_Product.Unidad),
@@ -334,6 +340,7 @@ export function folderReducer(state, action) {
           : folder;
       });
 
+      //El arrego "categorias" solo se va usar para insertarla en la peticiona la base de datos
       let categorias = [];
 
       clone
@@ -348,22 +355,26 @@ export function folderReducer(state, action) {
       /*const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
 */
-
+      //Retornamos al estado el clone que acabamos de editar
       return {
         folders: clone,
       };
     }
 
     case TYPES.EDIT_NOTE: {
+      //Primero, clonamos el objeto del estado para poder editarlo
       let clone = structuredClone(state.folders);
 
+      //Mapeamos el estado para poder encontrar el folder seleccionado
       clone.map((folder) => {
         return folder.Nombre === action.payload.View
           ? folder.Categorias.map((categoria) => {
+              //Mapeamos sus categorias para poder encontrar el folder seleccionado
               return Object.keys(categoria)[0] === action.payload.Category
                 ? Object.values(categoria)[0].Productos.map((producto) => {
+                    //Mapeamos los productos de la categoría para poder encontrar el producto seleccionado
                     return producto.Nombre === action.payload.Product
-                      ? (producto.Nota = action.payload.Note)
+                      ? (producto.Nota = action.payload.Note) //Asignamos un nuevo texto a el campo Nota
                       : producto;
                   })
                 : categoria;
@@ -371,6 +382,7 @@ export function folderReducer(state, action) {
           : folder;
       });
 
+      //El arrego "categorias" solo se va usar para insertarla en la peticiona la base de datos
       let categorias = [];
 
       clone
@@ -386,6 +398,7 @@ export function folderReducer(state, action) {
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
       */
 
+      //Retornamos al estado el clon que acabamos de editar
       return {
         folders: clone,
       };
@@ -399,6 +412,7 @@ export function folderReducer(state, action) {
       return state;
     }
 
+    //En cualquier otro caso retornamos el mismo estado
     default:
       return state;
   }

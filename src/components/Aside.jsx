@@ -1,19 +1,22 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/themeContext";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Aside() {
   const { theme } = useContext(ThemeContext);
   return (
     <div className={`aside ${theme.darkmode ? "dark" : "light"}`}>
+      {" "}
+      {/* Cambiamos la clase dark o light dependiendo del estado de theme*/}
       <div className="content-title">
         <div className="imagen">
           <img src="public/invent.png" alt="Invent" />
         </div>
         <div className="title">Inventario</div>
       </div>
-
       <nav className="navbar">
+        {" "}
+        {/*Navegador del aside */}
         <div className="menu nav-item">
           <div className="title-nav">Menú</div>
           <div className="list-nav">
@@ -21,6 +24,7 @@ export default function Aside() {
               to="/inventario"
               className={({ isActive }) => (isActive ? "active-link" : null)}
             >
+              {/* Agregamos la clase active-link si es que estamos en esa pagina (para agregar estilos al enlace) */}
               <div className="menu-item">
                 <i className="bx bx-folder-open bx-sm"></i>Inventario
               </div>
@@ -30,6 +34,8 @@ export default function Aside() {
               to="/estadisticas"
               className={({ isActive }) => (isActive ? "active-link" : null)}
             >
+              {" "}
+              {/* Agregamos la clase active-link si es que estamos en esa pagina (para agregar estilos al enlace) */}
               <div className="menu-item">
                 <i className="bx bxs-pie-chart-alt-2 bx-sm"></i>Estadísticas
               </div>
@@ -39,6 +45,8 @@ export default function Aside() {
               to="/guia"
               className={({ isActive }) => (isActive ? "active-link" : null)}
             >
+              {" "}
+              {/* Agregamos la clase active-link si es que estamos en esa pagina (para agregar estilos al enlace) */}
               <div className="menu-item">
                 <i className="bx bx-receipt bx-sm"></i>Guía de uso
               </div>
@@ -52,6 +60,8 @@ export default function Aside() {
               to="/ajustes"
               className={({ isActive }) => (isActive ? "active-link" : null)}
             >
+              {" "}
+              {/* Agregamos la clase active-link si es que estamos en esa pagina (para agregar estilos al enlace) */}
               <div className="menu-item">
                 <i className="bx bx-cog bx-sm"></i> Ajustes
               </div>
@@ -62,7 +72,6 @@ export default function Aside() {
             </div>
           </div>
         </div>
-
         <div className="importante">
           <b>Importante:</b> Al ser esta una versión pública la información no
           se guardará en la base de datos.
