@@ -30,6 +30,7 @@ export function folderReducer(state, action) {
         Categorias: [],
       });*/
 
+      //Regresa el estado el nuevo folder con un arreglo de categorias vacias y un nuevo id
       return {
         folders: [
           ...state.folders,
@@ -46,6 +47,7 @@ export function folderReducer(state, action) {
       //Borra un folder en la DB de Firebase
       //deleteDoc(doc(db, "Folders", `${action.payload}`));
 
+      //Regresa al estado todos los folders que no sean el folder que eliminamos
       return {
         folders: state.folders.filter((folder) => {
           return folder.Nombre !== action.payload;
@@ -54,6 +56,7 @@ export function folderReducer(state, action) {
     }
 
     case TYPES.ADD_CATEGORY: {
+      //Funcion que elige un color random para la nueva categoría
       const randomColor = () => {
         const colors = [
           "rgba(255, 182, 193,1)",
@@ -83,6 +86,9 @@ export function folderReducer(state, action) {
 
       let categorias = [];
 
+      //Primero, buscamos el folder y guardamos todos las categorias que ya tenga en un arreglo
+      //El arrego "categorias" solo se va usar para insertarla en la peticiona la base de datos
+
       state.folders
         .find((folder) => {
           return folder.Nombre === action.payload.View;
@@ -92,6 +98,8 @@ export function folderReducer(state, action) {
         });
 
       const COLOR = randomColor();
+
+      //Al arreglo le agregamos la nueva categoría con su color y un arreglo de productos vacio
 
       categorias.push({
         [`${action.payload.Nombre}`]: {
@@ -105,6 +113,8 @@ export function folderReducer(state, action) {
       /*const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
 */
+
+      //Se regresa el estado con el folder con las categorias que ya tiene y se le agrega la nueva categoría con su nuevo color.
       return {
         folders: state.folders.map((folder) => {
           return folder.Nombre === action.payload.View
@@ -126,7 +136,10 @@ export function folderReducer(state, action) {
     }
 
     case TYPES.DELETE_CATEGORY: {
+      //El arrego "categorias" solo se va usar para insertarla en la peticiona la base de datos
       let categorias = [];
+
+      //Se busca el folder seleccionado y se filtran las categorias para omitir la categoria que queremos eliminar
 
       state.folders
         .find((folder) => {
@@ -143,6 +156,8 @@ export function folderReducer(state, action) {
       /*const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
 */
+
+      //En el retorno del estado igual aplicamos el filtro
       return {
         folders: state.folders.map((folder) => {
           return folder.Nombre === action.payload.View
@@ -162,20 +177,24 @@ export function folderReducer(state, action) {
     }
 
     case TYPES.EDIT_CATEGORY: {
+      //Primero creamos un clone del objeto del estado, para poder editarlo
       let clone = structuredClone(state.folders);
 
+      //Mapeamos el estado para encontrar el folder seleccionado
       clone.map((folder) => {
         return folder.Nombre === action.payload.View
           ? folder.Categorias.map((categoria) => {
+              //Mapeamos para encontrar la categoría que queremos editar
               return Object.keys(categoria)[0] === action.payload.Name
-                ? ((categoria[action.payload.New_name] =
+                ? ((categoria[action.payload.New_name] = //Al nuevo nombre de la categoría se le asignan los valores que tenia la antigua
                     categoria[Object.keys(categoria)[0]]),
-                  delete categoria[Object.keys(categoria)[0]])
+                  delete categoria[Object.keys(categoria)[0]]) //Se borra la categoría antigua
                 : categoria;
             })
           : folder;
       });
 
+      //El arrego "categorias" solo se va usar para insertarla en la peticiona la base de datos
       let categorias = [];
 
       clone
@@ -192,20 +211,25 @@ export function folderReducer(state, action) {
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
 
       */
-
+      //Al estado se retorna el clon que editamos
       return {
         folders: clone,
       };
     }
 
     case TYPES.ADD_PRODUCT: {
+      //creamos un clon del objeto del estado para poder editarlo
       let clone = structuredClone(state.folders);
+
+      //Mapeamos el clon para encontrar ek folder seleccionado
 
       clone.map((folder) => {
         return folder.Nombre === action.payload.View
           ? folder.Categorias.map((categoria) => {
+              //Mapeamos sus categorias para encontrar la categoría seleccionada
               return Object.keys(categoria)[0] === action.payload.Category
                 ? Object.values(categoria)[0].Productos.push(
+                    //Al arreglo de los productos de esa categoría se le inserta el nuevo producto
                     action.payload.Product
                   )
                 : categoria;
@@ -214,6 +238,7 @@ export function folderReducer(state, action) {
       });
 
       let categorias = [];
+      //El arrego "categorias" solo se va usar para insertarla en la peticiona la base de datos
 
       clone
         .find((folder) => {
@@ -229,19 +254,25 @@ export function folderReducer(state, action) {
       const folderRef = doc(db, "Folders", action.payload.View);
       setDoc(folderRef, { Categorias: categorias }, { merge: true });
 */
+
+      //Se retorna el estado con el clon que acabamos de editar
       return {
         folders: clone,
       };
     }
 
     case TYPES.DELETE_PRODUCT: {
+      //Creamos un clon del objeto del estado para poder editarlo
       let clone = structuredClone(state.folders);
 
+      //Mapeamos el estado para encontar el folder seleccionado
       clone.map((folder) => {
         return folder.Nombre === action.payload.View
           ? folder.Categorias.map((categoria) => {
+              //Mapeamos las categorías del folder para encontrar la categoría seleccionada
               return Object.keys(categoria)[0] === action.payload.Category
                 ? (Object.values(categoria)[0].Productos = Object.values(
+                    //A los productos de esa categoria se le asignan los mismos productos pero si el productos que queremos borrar
                     clone
                       .find((folder) => {
                         return folder.Nombre === action.payload.View;
