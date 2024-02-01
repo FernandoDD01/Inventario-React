@@ -15,22 +15,23 @@ export default function Category({
   view,
   openModalDeleteCategory,
 }) {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext); //Treamos el estado de theme de ThemeContext (Con esto determinamos que estilos usar)
 
-  const { folders, addProduct, editCategory } = useContext(FoldersContext);
+  const { folders, addProduct, editCategory } = useContext(FoldersContext); //Traemos del FolderContext el estado de los folders y las funciones addProduct y editCategory
 
   const [isActiveModalAddProduct, openModalAddProduct, closeModalAddProduct] =
-    useModal(false);
+    useModal(false); //Con este custom Hook  manejamos si esta activa la ventana modal (Agregar producto) y cuando la abrimos y la cerramos, el valor inicial es "false" (ventana modal desactivada).
 
   const [
     isActiveModalEditCategory,
     openModalEditCategory,
     closeModalEditCategory,
-  ] = useModal(false);
+  ] = useModal(false); //Con este custom Hook  manejamos si esta activa la ventana modal (Editar categoría) y cuando la abrimos y la cerramos, el valor inicial es "false" (ventana modal desactivada).
 
-  const [dropdown, setdropdown] = useState(true);
+  const [dropdown, setdropdown] = useState(true); //con este useState manejamos el estado del despliegue de cada categoría, el valor inicial es true (desplegado)
 
   const [inputNewProduct, setInputNewProduct] = useState({
+    //Con este useState manejamos los imputs del modal agregar Producto
     Nombre: "",
     Cantidad: 1,
     Unidad: "Pza",
@@ -39,9 +40,10 @@ export default function Category({
     Nota: "",
   });
 
-  const [inputEditCategory, setInputEditCategory] = useState({ Nombre: "" });
+  const [inputEditCategory, setInputEditCategory] = useState({ Nombre: "" }); //Con este useState manejamos los imputs del modal Editar Categoría
 
   const [warningAddProduct, setWarningAddProduct] = useState({
+    // Con este useState manejamos los warnings de los imputs del modal Agregar producto
     void: false,
     duplicate: false,
     withSpaces: false,
@@ -53,6 +55,7 @@ export default function Category({
   });
 
   const [warningEditCategory, setWarningEditCategory] = useState({
+    // Con este useState manejamos los warnings de los imputs del modal Editar categoría
     void: false,
     duplicate: false,
     withSpaces: false,
@@ -61,6 +64,7 @@ export default function Category({
   });
 
   const modifyColor = () => {
+    //Esta funcion nos permite modificar la opacidad de un color para que haya una diferencia entre el encabezado de la categoría y la lista de productos
     if (theme.darkmode) {
       let new_color = color;
 
@@ -86,6 +90,7 @@ export default function Category({
   };
 
   const handleChange = (e) => {
+    //Cambia el estado del input con el nuevo valor que se ingresa en cada campo del modal Agregar Producto
     setInputNewProduct({
       ...inputNewProduct,
       [e.target.name]: e.target.value,
@@ -93,6 +98,7 @@ export default function Category({
   };
 
   const handleChangeEdit = (e) => {
+    //Cambia el estado del input con el nuevo valor que se ingresa en cada campo del modal Editar Categoría
     setInputEditCategory({
       ...inputEditCategory,
       [e.target.name]: e.target.value,
@@ -100,7 +106,7 @@ export default function Category({
   };
 
   const modifyDropdown = (e) => {
-    //Se modifica el estado del dropdown
+    //Se modifica el estado del dropdown y se aplican estilos diferentes dependiendo si hay o no productos
 
     if (products.length !== 0 && dropdown === false) {
       setdropdown(true);
@@ -113,13 +119,12 @@ export default function Category({
       e.target.parentNode.parentNode.style.borderBottomLeftRadius = "20px";
       e.target.parentNode.parentNode.style.borderBottomRightRadius = "20px";
     }
-
-    //despues el estilo de los contenedores
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    //Verificamos que se cunplan cada una de la especificaciones de la información, sino activamos el warning correspondiente
     if (inputNewProduct.Nombre === "") {
       setWarningAddProduct({ ...warningAddProduct, void: true });
       return;
@@ -145,6 +150,7 @@ export default function Category({
       return;
     }
 
+    //Realizamos la verificacion para que el producto no este repetido
     const foundCategory = folders
       .find((folder) => {
         return folder.Nombre === view;
@@ -169,17 +175,18 @@ export default function Category({
       return;
     }
 
-    closeModalAddProduct();
+    //Si se cumplieron todas las verificaciones...
 
-    console.log(foundCategory);
+    closeModalAddProduct(); //Cerramos el modal
 
-    addProduct(inputNewProduct, categoryName, view);
-    resetWarnings();
+    addProduct(inputNewProduct, categoryName, view); //Mandamos a llamar la función para agregar productos y pasamos como paramentro el nuevo producto, el nombre de la categoría y el nombre del folder en el que nos encontramos
+    resetWarnings(); // Reseteamos los warnings
   };
 
   const handleSubmitEditCategory = (e) => {
     e.preventDefault();
 
+    //Verificamos que se cunplan cada una de la especificaciones de la información, sino activamos el warning correspondiente
     if (inputEditCategory.Nombre === "") {
       setWarningEditCategory({ ...warningEditCategory, void: true });
       return;
@@ -192,8 +199,6 @@ export default function Category({
     const findName = findfolder.Categorias.some((el) => {
       return Object.keys(el)[0] === inputEditCategory.Nombre;
     });
-    console.log(Object.keys(findfolder.Categorias));
-    console.log(findName);
 
     if (findName === true) {
       setWarningEditCategory({ ...warningEditCategory, duplicate: true });
@@ -204,11 +209,12 @@ export default function Category({
       setWarningEditCategory({ ...warningEditCategory, withSpaces: true });
       return;
     }
+    //Si se cumplieron todas las verificaciones...
 
-    closeModalEditCategory();
+    closeModalEditCategory(); //Cerramos el modal
 
-    editCategory(categoryName, inputEditCategory.Nombre, view);
-    resetWarningsEditCategory();
+    editCategory(categoryName, inputEditCategory.Nombre, view); //Mandamos a llamar la función para editar categoría y pasamos como paramentro el antiguo nombre de la categoría, el nuevo  nombre de la categoría y el nombre del folder en el que nos encontramos
+    resetWarningsEditCategory(); //Reseteamos los warinings
   };
 
   const resetWarnings = () => {
