@@ -13,14 +13,22 @@ export default function Guide() {
   return (
     <main className={`${theme.darkmode ? "dark" : "light"}`}>
       <div className="guide">
-        <h1>
-          Bienvenid@ a la guía de uso de mi aplicacación web de inventario
-        </h1>
+        <h1>Bienvenid@ a la guía de uso de la aplicación web inventario</h1>
         <section className="fast-start">
           <NavLink to="/inventario">
             <i className="bx bx-run bx-sm"></i>
             <h4>Ir directamente al inventario</h4>
           </NavLink>
+        </section>
+        <section className="introduction">
+          <h3>Introducción</h3>
+          <p>
+            En esta guía aprenderas paso a paso cómo usar todas las funciones de
+            la aplicación web de inventario. Conocerás las secciones que la
+            integran y aprenderás a crear folders categorías, agregar productos,
+            editar información, usar el modo lista y como visualizar las
+            estadísticas de tu inventario.
+          </p>
         </section>
         <section className="index-guide">
           <h3>
@@ -70,25 +78,20 @@ export default function Guide() {
 
           <div className="section-content-guide">
             <p>
-              Para agregar un nuevo folder, dirigete a la sección Inventario:
+              Para agregar un nuevo folder, dirigete a la sección{" "}
+              <b>Inventario</b>:
             </p>
             <div className="content-img">
-              <img src="src/assets/img-guide/inventario.jpg" alt="" />
+              <img src="/img-guide/inventario.jpg" alt="" />
             </div>
 
             <p> y haz click en el botón:</p>
 
             <div className="content-img">
               <div className="content-img">
-                {" "}
-                <img src="src/assets/img-guide/agregar_folder.jpg" alt="" />
+                <img src="/img-guide/agregar_folder.jpg" alt="" />
               </div>
             </div>
-
-            <p>
-              Es importante que el nombre del folder no contenga espacios y que
-              no se repita con el nombre de otros folders.
-            </p>
           </div>
         </section>
         <div className="refer" id="add-category-guide"></div>
@@ -108,22 +111,25 @@ export default function Guide() {
           </div>
 
           <div className="section-content-guide">
-            <p>Una vez creado un folder preciona el botón Agregar Categoría:</p>
+            <p>
+              Una vez creado un folder preciona el botón
+              <b>Agregar Categoría</b>:
+            </p>
             <div className="content-img">
-              <img src="src/assets/img-guide/agregar_categoria.jpg" alt="" />
+              <img src="/img-guide/agregar_categoria.jpg" alt="" />
             </div>
 
-            <p> y elige el nombre que quieres para la nueva categoría</p>
+            <p> y elige el nombre que desees para la nueva categoría</p>
             <p>
-              Es importante que el nombre de la categoría no contenga espacios y
-              que no se repita con el nombre de otras categorías del mismo
-              folder.
+              Es importante que el nombre de la categoría y el folder no
+              contenga espacios y que no se repita con el nombre de otras
+              categorías o folders.
             </p>
 
             <p>Cuando tengas creada la categoría se vera algo así:</p>
             <div className="content-img">
               <img
-                src="src/assets/img-guide/categoria_vacia.jpg"
+                src="/img-guide/categoria_vacia.jpg"
                 alt=""
                 style={{ maxWidth: "100%" }}
               />
@@ -132,7 +138,7 @@ export default function Guide() {
             <p>Puedes borrar la categoría precionando el botón:</p>
 
             <div className="content-img">
-              <img src="src/assets/img-guide/boton_borrar.jpg" alt="" />
+              <img src="/img-guide/boton_borrar.jpg" alt="" />
             </div>
           </div>
         </section>
@@ -154,14 +160,10 @@ export default function Guide() {
             <p>Para editar una categoria debes oprimir el boton:</p>
 
             <div className="content-img">
-              <img src="src/assets/img-guide/boton_editar.jpg" alt="" />
+              <img src="/img-guide/boton_editar.jpg" alt="" />
             </div>
 
             <p> que esta a un lado del nombre.</p>
-            <p>
-              Recuerda que el nuevo nombre no puede repetirse con el nombre de
-              otras caregorías en el mismo folder.
-            </p>
           </div>
         </section>
         <div className="refer" id="add-product-guide"></div>
@@ -183,38 +185,42 @@ export default function Guide() {
             <p>Para agregar un producto, haz click en el botón: </p>
 
             <div className="content-img">
-              <img src="src/assets/img-guide/boton_agregar.jpg" alt="" />
+              <img src="/img-guide/boton_agregar.jpg" alt="" />
             </div>
 
             <p>
-              Se abrira un ventana donde deberas poner el nombre del producto,
-              cantidad, precio , enlace (opcional) y una nota (opcional)
+              Se abrira una ventana donde deberás agregar el nombre del
+              producto, cantidad, precio , enlace (opcional) y una nota
+              (opcional)
             </p>
 
             <div className="content-img">
-              <img src="src/assets/img-guide/agregar_producto.jpg" alt="" />
+              <img src="/img-guide/agregar_producto.jpg" alt="" />
             </div>
 
-            <p>La cantidad puede establecerse en diferentes unidades</p>
             <p>
-              En el subtotal de vera reflejado la suma de los precios de los
+              La cantidad puede establecerse en diferentes unidades (Pza, Kg,
+              Lt, Paq)
+            </p>
+            <p>
+              En el subtotal se verá reflejado la suma de los precios de los
               productos por sus cantidades, este precio esta dado en pesos
               mexicanos.
             </p>
 
             <div className="content-img">
               <img
-                src="src/assets/img-guide/sub_total.jpg"
+                src="/img-guide/sub_total.jpg"
                 alt=""
                 style={{ maxWidth: "100%" }}
               />
             </div>
 
-            <p>Y en el Total, se verá la suma de todos los subtotales.</p>
+            <p>En el Total, se verá la suma de todos los subtotales.</p>
 
             <div className="content-img">
               <img
-                src="src/assets/img-guide/total.jpg"
+                src="/img-guide/total.jpg"
                 alt=""
                 style={{ maxWidth: "100%" }}
               />
@@ -223,13 +229,10 @@ export default function Guide() {
             <p>Puedes borrar el producto haciendo click en el botón:</p>
 
             <div className="content-img">
-              <img
-                src="src/assets/img-guide/boton_borrar_producto.jpg"
-                alt=""
-              />
+              <img src="/img-guide/boton_borrar_producto.jpg" alt="" />
             </div>
 
-            <p>Que está a un lado del producto que deseas eliminar.</p>
+            <p>Este se encuentra a un lado del producto que deseas eliminar.</p>
           </div>
         </section>
         <div className="refer" id="edit-product-guide"></div>
@@ -252,14 +255,13 @@ export default function Guide() {
 
             <div className="content-img">
               <img
-                src="src/assets/img-guide/boton_editar_producto.jpg"
+                src="/img-guide/boton_editar_producto.jpg"
                 alt=""
                 style={{ maxWidth: "100%" }}
               />
             </div>
 
-            <p>Que está a un lado del producto que deseas editar.</p>
-            <p>Recuerda que el enlace y la nota son opcionales.</p>
+            <p>Este se encuentra a un lado del producto que deseas editar.</p>
           </div>
         </section>
         <div className="refer" id="edit-note-guide"></div>
@@ -279,13 +281,13 @@ export default function Guide() {
           </div>
           <div className="section-content-guide">
             <p>
-              Puedes visualizar y editar rapidamente la nota del producto
+              Puedes visualizar y editar rápidamente la nota del producto
               haciendo click en el botón:
             </p>
 
             <div className="content-img">
               <img
-                src="src/assets/img-guide/boton_nota.jpg"
+                src="/img-guide/boton_nota.jpg"
                 alt=""
                 style={{ maxWidth: "100%" }}
               />
@@ -303,7 +305,7 @@ export default function Guide() {
 
             <div className="content-img">
               <img
-                src="src/assets/img-guide/nota_llena.jpg"
+                src="/img-guide/nota_llena.jpg"
                 alt=""
                 style={{ maxWidth: "100%" }}
               />
@@ -327,27 +329,27 @@ export default function Guide() {
           </div>
           <div className="section-content-guide">
             <p>
-              Si deseas visualizar los productos en el moto lista de compras haz
+              Si deseas visualizar los productos en el modo lista de compras haz
               click en el botón:
             </p>
 
             <div className="content-img">
               <img
-                src="src/assets/img-guide/modo_lista.jpg"
+                src="/img-guide/modo_lista.jpg"
                 alt=""
                 style={{ maxWidth: "100%" }}
               />
             </div>
 
             <p>
-              El modo lista de compras es una funcionalidad que te permite
-              visualizar todos los productos de un folder en una lista, en ella
-              podrás marcar o desmarcar los productos que ya hayas comprado
+              El <b>modo lista de compras </b> es una funcionalidad que permite
+              visualizar aquellos productos de un folder en un listado, en ella
+              podrás marcar o desmarcar los productos que ya hayas adquirido
             </p>
 
             <div className="content-img">
               <img
-                src="src/assets/img-guide/lista_compras.jpg"
+                src="/img-guide/lista_compras.jpg"
                 alt=""
                 style={{ maxWidth: "100%" }}
               />
@@ -376,7 +378,7 @@ export default function Guide() {
             </p>
             <div className="content-img">
               <img
-                src="src/assets/img-guide/estadisticas.jpg"
+                src="/img-guide/estadisticas.jpg"
                 alt=""
                 style={{ maxWidth: "100%" }}
               />

@@ -2,12 +2,19 @@
  ya que en el se encuentra el estado de los folders
 y tiene todas las acciones que realiza la app principal */
 import { createContext, useReducer } from "react";
-import { folders } from "../firebase/firebase";
+import { folders } from "../mookData.json/data.json";
 import { folderReducer } from "../Reducers/folderReducer";
 import { TYPES } from "../actions/folderActions";
 
 //Toastify es un libreria muy útil para generar mensajes emergentes
 import toastify from "toastify-js";
+
+/*const datos = async () => {
+  const folders = await Folders();
+  console.log(folders);
+
+  return folders;
+};*/
 
 //El estado inicial es el objeto de folders de la consulta a la base de datos
 const foldersInitialState = { folders };

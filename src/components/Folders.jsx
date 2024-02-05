@@ -166,7 +166,7 @@ export default function Folders() {
               className="adver-categoria-add-folder"
               style={{ display: "block", fontSize: "12px", color: "red" }}
             >
-              El nombre ya esta en uso
+              El nombre ya está en uso
             </p>
           )}
 

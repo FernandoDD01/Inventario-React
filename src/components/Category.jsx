@@ -335,7 +335,7 @@ export default function Category({
               className="adver-product"
               style={{ display: "block", fontSize: "12px", color: "red" }}
             >
-              El nombre ya esta en uso
+              El nombre ya está en uso
             </p>
           )}
           {warningAddProduct.withSpaces === true && (
@@ -471,7 +471,7 @@ export default function Category({
               className="adver-categoria"
               style={{ display: "block", fontSize: "12px", color: "red" }}
             >
-              El nombre ya esta en uso
+              El nombre ya está en uso
             </p>
           )}
 

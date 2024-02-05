@@ -10,7 +10,7 @@ export default function Aside() {
       {/* Cambiamos la clase dark o light dependiendo del estado de theme*/}
       <div className="content-title">
         <div className="imagen">
-          <img src="public/invent.png" alt="Invent" />
+          <img src="/invent.png" alt="Invent" />
         </div>
         <div className="title">Inventario</div>
       </div>

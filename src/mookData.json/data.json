@@ -2,47 +2,41 @@
   "folders": [
     {
       "id": 1,
-      "Nombre": "Casa",
-      "Categorias": []
-    },
-    {
-      "id": 2,
-      "Nombre": "Garage",
+      "Nombre": "ejemplo",
       "Categorias": [
         {
-          "Herramientas": { "Color": "rgba(250, 128, 114,1)", "Productos": [] }
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "Nombre": "Baño",
-      "Categorias": [
-        {
-          "Piso": {
+          "Electrónicos": {
             "Color": "rgba(255, 228, 196,1)",
             "Productos": [
               {
-                "Nombre": "Jabon",
-                "Precio": 5000,
-                "Cantidad": 132,
+                "Nombre": "Laptop",
+                "Precio": 39999,
+                "Cantidad": 2,
                 "Unidad": "Pza",
-                "Enlace": "https://google.com",
-                "Nota": "Esto es una nota de prueba"
+                "Enlace": "https://www.officedepot.com.mx/officedepot/en/Categor%C3%ADa/Todas/computo/laptops-y-macbook/laptops/Laptop-Asus-ZenBook-14-X-OLED-Intel-Core-i7-12%C3%82%C2%AA-gen-14-pulg-512gb-SSD-16gb-RAM-Gris-/p/100101001",
+                "Nota": "Esto es una nota para el producto 1"
+              },
+              {
+                "Nombre": "Calular",
+                "Precio": 24999,
+                "Cantidad": 1,
+                "Unidad": "Pza",
+                "Enlace": "https://www.samsung.com/mx/smartphones/galaxy-z-flip5/buy/",
+                "Nota": "Esto es una nota para el producto 2"
               }
             ]
           }
         },
         {
-          "Espejo": {
-            "Color": "rgba(255, 244, 174,1)",
+          "Alimentos": {
+            "Color": "rgba(192, 192, 192,1)",
             "Productos": [
               {
-                "Nombre": "Liquido",
+                "Nombre": "Manzanas",
                 "Precio": 30,
-                "Cantidad": 4,
+                "Cantidad": 3,
                 "Unidad": "Kg",
-                "Enlace": "https://google.com",
+                "Enlace": "",
                 "Nota": ""
               }
             ]

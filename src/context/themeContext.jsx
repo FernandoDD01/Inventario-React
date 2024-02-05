@@ -1,11 +1,19 @@
 import { createContext, useReducer, useState } from "react";
-import { mode } from "../firebase/firebase";
+import { mode } from "../mookData.json/mode.json";
 import { folderReducer } from "../Reducers/folderReducer";
 import { CHANGES } from "../actions/darkmodeActions";
 
 //Este contexto maneja el estado de Tema (darkmode)
 
 //El estao inicial es el que se obtiene de hacer la consulta a la base de datos
+
+/*const datos = async () => {
+  const mode = await Mode();
+  console.log(mode);
+
+  return mode;
+};*/
+
 const themeInitialState = mode;
 
 console.log(themeInitialState);

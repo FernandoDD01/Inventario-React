@@ -58,6 +58,10 @@
   color: inherit;
 }
 
+.introduction {
+  text-align: left;
+}
+
 .index-guide {
   text-align: left;
   display: flex;
